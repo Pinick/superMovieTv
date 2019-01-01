@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zmovie.app.RoundFrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="290pt"
+    android:background="@color/item_default_color"
+    app:rfl_radius="8pt"
+    android:focusable="true"
+    android:clickable="true">
+
+        <ImageView
+            android:id="@+id/image"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@android:color/holo_green_dark"
+            android:layout_marginLeft="10pt"
+            android:visibility="invisible"
+            android:layout_marginRight="10pt"
+            android:textSize="28pt"
+            android:textStyle="bold"/>
+        
+        <TextView
+            android:id="@+id/tv_changed"
+            android:layout_width="match_parent"
+            android:layout_height="46pt"
+            android:background="#fc252525"
+            android:textColor="#fff"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:padding="10pt"
+            android:text="底部文本"
+            android:textSize="18pt"/>
+
+</com.zmovie.app.RoundFrameLayout>

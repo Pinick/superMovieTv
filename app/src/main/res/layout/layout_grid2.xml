@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <com.owen.tvrecyclerview.widget.TvRecyclerView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@style/TwoWayView"
+        android:orientation="vertical"
+        app:spanCount="4"
+        app:tv_layoutManager="V7GridLayoutManager"/>
+
+</FrameLayout>

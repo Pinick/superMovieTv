@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/epg_login_bg"
+    android:layout_height="match_parent">
+    <ImageView
+        android:layout_width="220pt"
+        android:layout_height="330pt"
+        android:layout_marginLeft="50pt"
+        android:scaleType="centerCrop"
+        android:layout_marginTop="80pt"
+        android:id="@+id/detail_poster"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="电影标题"
+        android:id="@+id/detai_title"
+        android:textColor="#fff"
+        android:textSize="34pt"
+        android:textStyle="bold"
+        android:layout_toRightOf="@+id/detail_poster"
+        android:layout_marginLeft="20pt"
+        android:layout_marginTop="90pt"
+
+        />
+    <!-- android:background="@drawable/detail_tx_bg"-->
+    <TextView
+        android:layout_toRightOf="@+id/detail_poster"
+        android:layout_marginLeft="20pt"
+        android:layout_marginBottom="30pt"
+        android:layout_marginRight="100pt"
+        android:layout_width="match_parent"
+        android:padding="20pt"
+        android:lines="3"
+        android:layout_above="@+id/it_list"
+        android:ellipsize="end"
+        android:textColor="#e7ffffff"
+        android:id="@+id/detail_desc"
+        android:focusable="true"
+        android:layout_height="120pt"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="50pt"
+        android:layout_marginRight="50pt"
+        android:layout_marginBottom="10pt"
+        android:clipChildren="false"
+        android:id="@+id/it_list"
+        android:clipToPadding="false"
+        android:layout_height="270pt">
+
+        <com.owen.tvrecyclerview.widget.TvRecyclerView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/downlist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="60pt"
+            android:paddingRight="60pt"
+            android:clipToPadding="false"
+            android:clipChildren="false"
+            android:background="#000d557f"
+            android:focusable="true"
+            style="@style/TwoWayView"
+            android:orientation="vertical"
+            app:tv_layoutManager="GridLayoutManager"
+            app:tv_numColumns="3"
+            app:tv_numRows="3"
+            />
+    </FrameLayout>
+</RelativeLayout>

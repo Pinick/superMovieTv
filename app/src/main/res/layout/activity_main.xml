@@ -1,0 +1,85 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@drawable/share_loading_page_bg"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50pt"
+        android:gravity="right|center_vertical"
+        android:paddingRight="70pt"
+        android:layout_marginTop="30pt"
+        android:orientation="horizontal"
+        >
+        <Button
+            android:layout_width="130px"
+            android:textColor="@drawable/selector_tab_font_color"
+            android:text="下载管理"
+            android:background="@drawable/tab_text_header"
+            android:layout_height="40pt" />
+        <Button
+            android:layout_width="130px"
+            android:textColor="@drawable/selector_tab_font_color"
+            android:text="观看历史"
+            android:background="@drawable/tab_text_header"
+            android:layout_height="40pt" />
+        <Button
+            android:layout_width="130px"
+            android:textColor="@drawable/selector_tab_font_color"
+            android:background="@drawable/tab_text_header"
+            android:text="收藏记录"
+            android:layout_height="40pt" />
+    </LinearLayout>
+    <com.zmovie.app.tablayout.TvTabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="80pt"
+        android:background="#00272727"
+        app:tabIndicatorGravity="bottom"
+        app:tabIndicatorHeight="4pt"
+        app:tabIndicatorWidth="100pt"
+        app:tabGravity="center"
+        app:tabTexSize="22pt"
+        app:tabBackground="@drawable/selector_tab_bg"
+        app:tabTextColor="@drawable/selector_tab_font_color"
+        app:tabMinWidth="150pt"
+        app:tabIndicatorBackgroundHeight="100pt"
+        app:tabScrollMode="fixed"/>
+
+    <FrameLayout
+        android:layout_below="@id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+        <LinearLayout
+            android:id="@+id/bottom_layout"
+            android:layout_width="match_parent"
+            android:visibility="invisible"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center">
+
+            <TextView
+                android:id="@+id/position"
+                style="@style/StateText"/>
+
+            <TextView
+                android:id="@+id/count"
+                style="@style/StateText"/>
+
+            <TextView
+                android:id="@+id/state"
+                style="@style/StateText"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>

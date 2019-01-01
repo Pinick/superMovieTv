@@ -1,0 +1,32 @@
+<!--
+  ~ Copyright (C) 2014 Lucas Rocha
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+
+    <color name="actionbar_color">#3FBA91</color>
+
+    <color name="titlestrip_background_color">#DEDEDE</color>
+    <color name="titlestrip_text_color">#999999</color>
+
+    <color name="item_border_color">#666666</color>
+    <color name="item_default_color">#ffffff</color>
+    <color name="item_pressed_color">#26d8fb</color>
+    <color name="item_activated_color">#ffffff</color>
+    <color name="green_99cc00">#99cc00</color>
+    <color name="green_bright">#00ffe5</color>
+    <color name="rectangle">#FF9900</color>
+    <color name="windowBackground">#1c1c1c</color>
+</resources>

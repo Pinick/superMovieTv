@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zmovie.app.RoundFrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="200pt"
+    android:focusable="true"
+    android:clickable="true"
+    android:layout_height="80pt">
+
+    <TextView
+        android:layout_width="200pt"
+        android:layout_height="wrap_content"
+        android:lines="2"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:paddingLeft="30pt"
+        android:paddingRight="30pt"
+        android:id="@+id/downTitle"
+        />
+</com.zmovie.app.RoundFrameLayout>

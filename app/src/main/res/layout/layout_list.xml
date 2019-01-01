@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    
+        <Button
+            android:id="@+id/btn1"
+            android:text="b\nt\nn\n1"
+            android:layout_width="50pt"
+            android:layout_height="match_parent"
+            android:visibility="visible"/>
+    
+        <com.owen.tvrecyclerview.widget.TvRecyclerView
+            android:id="@+id/list_v7"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:background="#DDDD22"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20pt"
+            android:padding="20pt"
+            app:tv_selectedItemIsCentered="true"
+            android:orientation="vertical"
+            app:tv_isMenu="true"
+            app:tv_layoutManager="V7LinearLayoutManager"/>
+    
+        <Button
+            android:id="@+id/btn2"
+            android:text="b\nt\nn\n2"
+            android:layout_width="60pt"
+            android:layout_height="match_parent"
+            android:visibility="visible"/>
+    
+        <com.owen.tvrecyclerview.widget.TvRecyclerView
+            android:id="@+id/list"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:background="#DDDD22"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:padding="20pt"
+            android:orientation="horizontal"
+            app:tv_layoutManager="ListLayoutManager"/>
+    
+        <Button
+            android:id="@+id/btn3"
+            android:text="b\nt\nn\n3"
+            android:layout_width="60pt"
+            android:layout_height="match_parent"
+            android:visibility="visible"/>
+        
+    </LinearLayout>
+
+</FrameLayout>

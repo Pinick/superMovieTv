@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TabItem">
+        <attr name="android:text"/>
+        <attr name="android:icon"/>
+        <attr name="android:layout"/>
+    </declare-styleable>
+
+    <declare-styleable name="TabLayout">
+        <attr name="tabIndicatorResId" format="reference" />
+        <!--<attr name="tabIndicatorColor" format="color|reference"/>-->
+        <attr name="tabIndicatorWidth" format="dimension"/>
+        <attr name="tabIndicatorHeight" format="dimension"/>
+        <attr name="tabIndicatorBackgroundHeight" format="dimension"/>
+        <attr name="tabIndicatorBackgroundColor" format="color"/>
+        <attr name="tabContentStart" format="dimension"/>
+        <attr name="tabContentBottom" format="dimension"/>
+        <attr name="tabBackground" format="reference"/>
+        <attr name="isTimeLine" format="boolean" />
+        <attr name="tabCircleDotRadius" format="dimension" />
+        <attr name="tabCircleDotColor" format="color|reference" />
+        <attr name="tabScrollMode">
+            <enum name="scrollable" value="0"/>
+            <enum name="fixed" value="1"/>
+        </attr>
+        <attr name="tabGravity">
+            <enum name="top" value="0"/>
+            <enum name="center" value="1"/>
+            <enum name="bottom" value="2"/>
+            <enum name="fill" value="3"/>
+        </attr>
+        <attr name="tabIndicatorGravity">
+            <enum name="top" value="0"/>
+            <enum name="center" value="1"/>
+            <enum name="bottom" value="2"/>
+        </attr>
+        <attr name="tabMinWidth" format="dimension"/>
+        <attr name="tabMaxWidth" format="dimension"/>
+        <attr name="tabTexSize" format="dimension"/>
+        <attr name="tabTextColor" format="color|reference"/>
+        <attr name="tabPaddingStart" format="dimension"/>
+        <attr name="tabPaddingTop" format="dimension"/>
+        <attr name="tabPaddingEnd" format="dimension"/>
+        <attr name="tabPaddingBottom" format="dimension"/>
+        <attr name="tabPadding" format="dimension"/>
+
+    </declare-styleable>
+
+    <dimen name="tablayout_tab_scrollable_min_width">72dp</dimen>
+    <dimen name="tablayout_tab_text_size">14sp</dimen>
+    <dimen name="tablayout_tab_text_size_2line">12sp</dimen>
+</resources>

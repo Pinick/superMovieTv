@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="60pt"
+    android:paddingRight="60pt">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <com.owen.tvrecyclerview.widget.TvRecyclerView
+            android:id="@+id/list_menu"
+            style="@style/TwoWayView"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="180pt"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical"
+            app:tv_isMenu="true"
+            app:tv_layoutManager="ListLayoutManager"/>
+
+        <com.owen.tvrecyclerview.widget.TvRecyclerView
+            android:id="@+id/list"
+            style="@style/TwoWayView"
+            android:layout_marginLeft="30pt"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:tv_laneCountsStr="24,60,10"
+            app:tv_isIntelligentScroll="true"
+            app:tv_optimizeLayout="true"
+            app:tv_layoutManager="MetroGridLayoutManager"/>
+
+    </LinearLayout>
+    
+</FrameLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.owen.tvrecyclerview.widget.TvRecyclerView
+        android:id="@+id/home_list"
+        style="@style/TwoWayView"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#1c1c1c"
+        app:tv_laneCountsStr="24,60,10"
+        app:tv_isIntelligentScroll="true"
+        app:tv_optimizeLayout="true"
+        app:tv_layoutManager="MetroGridLayoutManager"/>
+</FrameLayout>

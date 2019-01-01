@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_gravity="center"
+    android:background="#de222222"
+    android:layout_marginLeft="120pt"
+    android:layout_marginRight="120pt"
+    android:layout_marginTop="50pt"
+    android:layout_marginBottom="50pt"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:scrollbars="none"
+        android:padding="50pt"
+        android:layout_centerInParent="true"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="影片简介："
+                android:textStyle="bold"
+                android:textSize="30pt"
+                android:textColor="#fff"
+                android:layout_margin="10pt"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:lineSpacingExtra="10pt"
+                android:id="@+id/click_desc"
+                />
+            <ImageView
+                android:layout_width="match_parent"
+                android:id="@+id/screen_cut"
+                android:layout_marginTop="30pt"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
