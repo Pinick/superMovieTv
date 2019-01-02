@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeRootActivity">
+
+
+
+    <com.zmovie.app.tablayout.TvTabLayout
+        android:id="@+id/home_tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="80pt"
+        android:background="#00272727"
+        app:tabIndicatorGravity="bottom"
+        app:tabIndicatorHeight="4pt"
+        app:tabIndicatorWidth="100pt"
+        app:tabGravity="center"
+        app:tabTexSize="22pt"
+        app:tabBackground="@drawable/selector_tab_bg"
+        app:tabTextColor="@drawable/selector_tab_font_color"
+        app:tabMinWidth="150pt"
+        app:tabIndicatorBackgroundHeight="100pt"
+        app:tabScrollMode="fixed"/>
+
+    <FrameLayout
+        android:layout_below="@+id/home_tab_layout"
+        android:layout_marginTop="20pt"
+        android:id="@+id/tab_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</RelativeLayout>

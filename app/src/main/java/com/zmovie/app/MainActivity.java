@@ -78,12 +78,12 @@ public class MainActivity extends FragmentActivity implements BaseFragment.Focus
                 , true);
         mTabLayout.addTab(
                 mTabLayout.newTab()
-                        .setText("经典高清")
+                        .setText("在线观看")
 //                        .setIcon(R.drawable.ic_staggered)
                 );
         mTabLayout.addTab(
                 mTabLayout.newTab()
-                        .setText("国配电影")
+                        .setText("BT影库")
 //                        .setIcon(R.drawable.ic_staggered)
                );
         mTabLayout.addTab(
