@@ -49,6 +49,11 @@ public class TvTabLayout extends TabLayout {
     }
 
     @Override
+    public void setTabScrollMode(int mode) {
+        super.setTabScrollMode(mode);
+    }
+
+    @Override
     protected void onTabUnselected(@NonNull Tab tab) {
         ViewPropertyAnimator animator = tab.getView().animate();
         if(mScaleValue > 1) {

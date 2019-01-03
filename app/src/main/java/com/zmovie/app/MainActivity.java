@@ -139,7 +139,6 @@ public class MainActivity extends FragmentActivity implements BaseFragment.Focus
         @Override
         public void onTabSelected(TabLayout.Tab tab) {
             final int position = tab.getPosition();
-            Log.i(LOGTAG, "onTabSelected...position="+position);
             mFragment = (Fragment) getSupportFragmentManager().findFragmentByTag(position + "");
             FragmentTransaction mFt = getSupportFragmentManager().beginTransaction();
             if (mFragment == null) {

@@ -144,13 +144,4 @@ public class GridFragment extends BaseFragment implements IMoview {
         mRecyclerView.setLoadingMore(false); //加载数据完毕
     }
 
-    @Override
-    public void loadBtData(RecentUpdate result) {
-
-    }
-
-    @Override
-    public void loadDetail(BtInfo result) {
-
-    }
 }

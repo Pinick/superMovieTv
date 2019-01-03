@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <com.owen.tab.TvTabLayout
+        android:id="@+id/online_tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        app:tabIndicatorResId="@color/actionbar_color"
+        app:tabIndicatorWidth="28dp"
+        app:tabIndicatorHeight="4dp"
+        app:tabMinWidth="100dp"
+        app:tabScrollMode="scrollable"
+        app:tabGravity="center"
+        app:tabPaddingBottom="12dp"
+        app:tabTextSelectedScale="1.0"
+        app:tabTexSize="16pt"
+        app:tabTextColor="@color/green_99cc00"
+
+        />
+    <android.support.v4.view.ViewPager
+        android:layout_marginTop="10pt"
+        android:id="@+id/mvpager"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/online_tab_layout"
+        android:layout_height="match_parent"/>
+</RelativeLayout>

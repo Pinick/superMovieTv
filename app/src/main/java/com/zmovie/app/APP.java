@@ -1,6 +1,8 @@
 package com.zmovie.app;
 
 import android.app.Application;
+import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import com.zmovie.app.display.DisplayAdaptive;
 
@@ -10,7 +12,7 @@ import com.zmovie.app.display.DisplayAdaptive;
  * 
  */
 
-public class ExampleApp extends Application {
+public class APP extends Application {
     final static float DESIGN_WIDTH = 1280; //绘制页面时参照的设计图宽度
     
     @Override
@@ -23,5 +25,11 @@ public class ExampleApp extends Application {
     public void onTerminate() {
         super.onTerminate();
         DisplayAdaptive.getInstance().release();
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(base);
     }
 }

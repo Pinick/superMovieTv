@@ -29,4 +29,5 @@
     <color name="green_bright">#00ffe5</color>
     <color name="rectangle">#FF9900</color>
     <color name="windowBackground">#1c1c1c</color>
+    <color name="tab_line_color">#00e7f7</color>
 </resources>
