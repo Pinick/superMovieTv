@@ -13,7 +13,7 @@
         android:paddingRight="20pt"
         android:background="#00e1e1e1"
         android:layout_weight="1"
-        style="@style/TwoWayView"
+        app:tv_loadMoreBeforehandCount="14"
         android:orientation="vertical"
         app:tv_layoutManager="GridLayoutManager"
         app:tv_numColumns="6"

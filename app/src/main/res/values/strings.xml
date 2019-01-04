@@ -16,7 +16,7 @@
 
 <resources>
 
-    <string name="app_name">TvRecyclerViewSample</string>
+    <string name="app_name">极光影院</string>
 
     <item name="tag_view_hold" type="id" />
 

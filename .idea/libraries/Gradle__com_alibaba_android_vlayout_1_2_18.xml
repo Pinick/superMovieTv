@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.alibaba.android:vlayout-1.2.18">
+    <ANNOTATIONS>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/vlayout-1.2.18.aar/e5c9c8c953476cdf200cacb7bb02fd19/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/vlayout-1.2.18.aar/e5c9c8c953476cdf200cacb7bb02fd19/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/vlayout-1.2.18.aar/e5c9c8c953476cdf200cacb7bb02fd19/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.alibaba.android/vlayout/1.2.18/5bc33dcf9564c0236cc9cb7f81877027b9870761/vlayout-1.2.18-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

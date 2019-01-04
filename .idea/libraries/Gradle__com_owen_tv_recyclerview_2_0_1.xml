@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.owen:tv-recyclerview-2.0.1">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/tv-recyclerview-2.0.1.aar/3bf85a17cebd1f58837c2a30c77db642/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/tv-recyclerview-2.0.1.aar/3bf85a17cebd1f58837c2a30c77db642/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.owen/tv-recyclerview/2.0.1/3ab86bb16f07682c21e41ff56a42be896dc17eb4/tv-recyclerview-2.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,6 +1,7 @@
 package com.zmovie.app.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -42,6 +43,7 @@ public class OnlineTabFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         initView();
     }
+
     private void initView() {
         String[] arr = { "今日推荐","最新电影","经典高清","国配电影",
                 "经典港片","国产剧","日韩剧",
@@ -54,13 +56,14 @@ public class OnlineTabFragment extends BaseFragment {
         ArrayList<Fragment> list = new ArrayList<>();
         for (int i = 0; i < arr.length; i++) {
             list.add(MovListFragment.newInstance(type[i]));
-            mTablayout.addTab(mTablayout.newTab().setText(arr[i]));
+            mTablayout.addTab(mTablayout.newTab().setText(arr[i]),i==0);
         }
         PageAdapter adapter = new PageAdapter(getChildFragmentManager(),list,arr);
         mTablayout.setTabScrollMode(TabLayout.MODE_SCROLLABLE);
         mTablayout.setupWithViewPager(mvpager);
         mvpager.setOffscreenPageLimit(5);
         mvpager.setAdapter(adapter);
+
     }
     public static OnlineTabFragment getInstance(){
         if (onlineTabFragment==null){

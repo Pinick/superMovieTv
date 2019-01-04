@@ -9,10 +9,10 @@
 
 
 
-    <com.zmovie.app.tablayout.TvTabLayout
+    <com.owen.tab.TvTabLayout
         android:id="@+id/home_tab_layout"
         android:layout_width="520pt"
-        android:layout_height="80pt"
+        android:layout_height="60pt"
         android:layout_marginTop="20pt"
         android:clipChildren="false"
         android:background="#00272727"
@@ -31,7 +31,6 @@
 
     <FrameLayout
         android:layout_below="@+id/home_tab_layout"
-        android:layout_marginTop="20pt"
         android:id="@+id/home_tab_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

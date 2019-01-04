@@ -8,18 +8,19 @@
     <com.owen.tab.TvTabLayout
         android:id="@+id/online_tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        app:tabIndicatorResId="@color/actionbar_color"
-        app:tabIndicatorWidth="28dp"
+        android:layout_height="40pt"
+        app:tabIndicatorResId="@drawable/zx_p1_light"
+        app:tabIndicatorWidth="48dp"
         app:tabIndicatorHeight="4dp"
-        app:tabMinWidth="100dp"
+        android:layout_marginLeft="30pt"
+        app:tabIndicatorGravity="bottom"
+        app:tabMinWidth="100pt"
+        app:tabIndicatorBackgroundHeight="20pt"
         app:tabScrollMode="scrollable"
         app:tabGravity="center"
-        app:tabPaddingBottom="12dp"
         app:tabTextSelectedScale="1.0"
         app:tabTexSize="16pt"
-        app:tabTextColor="@color/green_99cc00"
+        app:tabTextColor="#ffffff"
 
         />
     <android.support.v4.view.ViewPager
