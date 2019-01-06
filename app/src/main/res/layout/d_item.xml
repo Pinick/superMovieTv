@@ -3,8 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="68pt"
-    android:background="@color/item_default_color"
+    android:layout_height="match_parent"
     app:rfl_radius="0pt"
     android:focusable="true"
     android:clickable="true">
@@ -14,10 +13,10 @@
             <ImageView
                 android:id="@+id/image"
                 android:scaleType="centerCrop"
-                android:layout_width="30pt"
+                android:layout_width="match_parent"
                 android:layout_marginLeft="10pt"
                 android:layout_marginTop="10pt"
-                android:layout_height="30pt"/>
+                android:layout_height="match_parent"/>
 
             <TextView
                 android:id="@+id/title"

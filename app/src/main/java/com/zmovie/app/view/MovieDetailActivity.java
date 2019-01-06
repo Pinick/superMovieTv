@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.TypedValue;
 import android.view.View;
@@ -32,7 +33,7 @@ import java.util.ArrayList;
  intent.putExtra(GlobalMsg.KEY_MOVIE_TITLE,datas.getData().get(position).getDownLoadName());
  intent.putExtra(GlobalMsg.KEY_MOVIE_DETAIL,datas.getData().get(position).getMvdesc());
  */
-public class MovieDetailActivity extends Activity {
+public class MovieDetailActivity extends AppCompatActivity {
 
     private String title;
     private String downUrl;
@@ -99,10 +100,8 @@ public class MovieDetailActivity extends Activity {
         poster = findViewById(R.id.detail_poster);
         recyclerView = findViewById(R.id.downlist);
         recyclerView.setSpacingWithMargins(12, 20);
-//        mvdesc = findViewById(R.id.mvdesc);
         titleView = findViewById(R.id.detai_title);
         titleView.setText(title);
-//        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setOnItemListener(new SimpleOnItemListener() {
 
             @Override
@@ -114,12 +113,6 @@ public class MovieDetailActivity extends Activity {
             @Override
             public void onItemClick(TvRecyclerView parent, View itemView, int position) {
 
-            }
-        });
-        recyclerView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-//                mFocusBorder.setVisible(hasFocus);
             }
         });
         sdesc = findViewById(R.id.detail_desc);

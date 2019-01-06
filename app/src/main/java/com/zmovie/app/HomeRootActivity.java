@@ -1,21 +1,26 @@
 package com.zmovie.app;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.os.Bundle;
 import android.util.TypedValue;
+import android.view.KeyEvent;
 import android.widget.FrameLayout;
 
+import com.huangyong.playerlib.Params;
 import com.owen.tab.TvTabLayout;
 import com.zmovie.app.focus.FocusBorder;
 import com.zmovie.app.fragment.BaseFragment;
 import com.zmovie.app.fragment.BtTabFragment;
 import com.zmovie.app.fragment.DownloadTabFragment;
+import com.zmovie.app.fragment.OnlineMovieFragment;
+import com.zmovie.app.fragment.OnlineSerisFragment;
 import com.zmovie.app.fragment.OnlineTabFragment;
-import com.zmovie.app.tablayout.TabLayout;
+import com.zmovie.app.view.OnScrollDownListener;
 
-public class HomeRootActivity extends FragmentActivity  implements BaseFragment.FocusBorderHelper{
+public class HomeRootActivity extends FragmentActivity implements BaseFragment.FocusBorderHelper{
 
     private TvTabLayout mTabLayout;
     private FrameLayout contents;
@@ -47,9 +52,15 @@ public class HomeRootActivity extends FragmentActivity  implements BaseFragment.
 
         mTabLayout.addTab(
                 mTabLayout.newTab()
-                        .setText("在线影院")
+                        .setText("看电影")
 //                        .setIcon(R.drawable.ic_staggered)
         ,true);
+        mTabLayout.addTab(
+                mTabLayout.newTab()
+                        .setText("看电视剧")
+//                        .setIcon(R.drawable.ic_staggered)
+                );
+
         mTabLayout.addTab(
                 mTabLayout.newTab()
                         .setText("BT影库")
@@ -76,11 +87,7 @@ public class HomeRootActivity extends FragmentActivity  implements BaseFragment.
         }
 
         private Fragment mFragment;
-        private int[] layoutIds = {
-                R.layout.online_tab_fragment,
-                R.layout.bt_tab_fragment,
-                R.layout.download_tab_fragment
-        };
+
 
         @Override
         public void onTabSelected(TvTabLayout.Tab tab) {
@@ -89,22 +96,25 @@ public class HomeRootActivity extends FragmentActivity  implements BaseFragment.
             FragmentTransaction mFt = getSupportFragmentManager().beginTransaction();
 
             if (mFragment == null) {
-                switch (layoutIds[position]) {
+                switch (position) {
 
-                    case R.layout.online_tab_fragment:
+                    case 0:
+                        mFragment = OnlineMovieFragment.getInstance();
+                        break;
+                    case  1:
+                        mFragment =OnlineSerisFragment.getInstance();
+                        break;
+                    case 2:
                         mFragment = OnlineTabFragment.getInstance();
                         break;
-                    case R.layout.bt_tab_fragment:
-                        mFragment = BtTabFragment.getInstance();
-                        break;
-                    case R.layout.download_tab_fragment:
+                    case 3:
                         mFragment = DownloadTabFragment.getInstance();
                         break;
 
                 }
                 mFt.add(R.id.home_tab_container, mFragment, String.valueOf(position));
             } else {
-                mFt.attach(mFragment);
+                mFt.show(mFragment);
             }
             mFt.commit();
 
@@ -116,7 +126,7 @@ public class HomeRootActivity extends FragmentActivity  implements BaseFragment.
         public void onTabUnselected(TvTabLayout.Tab tab) {
             if (mFragment != null) {
                 FragmentTransaction mFt = getSupportFragmentManager().beginTransaction();
-                mFt.detach(mFragment);
+                mFt.hide(mFragment);
                 mFt.commit();
             }
         }
@@ -126,4 +136,20 @@ public class HomeRootActivity extends FragmentActivity  implements BaseFragment.
 
         }
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode==KeyEvent.KEYCODE_BACK){
+
+            Intent intent = new Intent();
+            intent.setAction(Params.ACTION_RESET_POSITION);
+            sendBroadcast(intent);
+            return true;
+
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
 }

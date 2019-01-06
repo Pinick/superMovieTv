@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <com.owen.tab.TvTabLayout
+        android:id="@+id/online_tab_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="40pt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30pt"
+        app:tabIndicatorWidth="48dp"
+        android:clipToPadding="false"
+        android:clipChildren="false"
+        android:paddingTop="4pt"
+        android:paddingBottom="4pt"
+        android:paddingLeft="10pt"
+        android:paddingRight="10pt"
+        app:tabIndicatorHeight="4dp"
+        app:tabIndicatorGravity="bottom"
+        app:tabMinWidth="100pt"
+        app:tabIndicatorBackgroundHeight="30pt"
+        app:tabScrollMode="fixed"
+        app:tabGravity="center"
+        app:tabTextSelectedScale="1.2"
+        app:tabBackground="@drawable/selector_tab_bg"
+        app:tabTextColor="@drawable/selector_tab_font_color"
+        app:tabTexSize="16pt"
+
+        />
+    <android.support.v4.view.ViewPager
+        android:layout_marginTop="30pt"
+        android:id="@+id/mvpager"
+        android:clipChildren="false"
+        android:nextFocusUp="@id/online_tab_layout"
+        android:clipToPadding="false"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/online_tab_layout"
+        android:layout_height="match_parent"/>
+</RelativeLayout>

@@ -333,7 +333,7 @@ public class CommonViewHolder {
 
     public CommonViewHolder showImage(int viewId, String url) {
         ImageView imageView = getView(viewId);
-        Glide.with(mContext).load(url).into(imageView);
+        Glide.with(mContext).load(url).placeholder(R.drawable.mv_place_holder).into(imageView);
         return this;
     }
 }

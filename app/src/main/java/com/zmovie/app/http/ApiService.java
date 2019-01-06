@@ -5,6 +5,7 @@ import com.zmovie.app.domain.AppUpdateInfo;
 import com.zmovie.app.domain.BtInfo;
 import com.zmovie.app.domain.MovieInfo;
 import com.zmovie.app.domain.OnlineInfo;
+import com.zmovie.app.domain.OnlinePlayInfo;
 import com.zmovie.app.domain.RecentUpdate;
 import com.zmovie.app.domain.SubjectInfo;
 import com.zmovie.app.domain.SubjectTitleInfo;
@@ -29,9 +30,13 @@ public interface ApiService {
   Observable<SubjectInfo> getSubject(@Query("type") String typeKey, @Query("page") int page, @Query("pagesize") int pagesize);//获取专题列表
 
   @GET(UrlConfig.GET_ONLINE)
-  Observable<OnlineInfo> getOnlineMovie(@Query("page") int page, @Query("pagesize") int pagesize);//获取专题列表
+  Observable<OnlinePlayInfo> getOnlineMovie(@Query("type") String type, @Query("page") int page, @Query("pagesize") int pagesize);//获取专题列表
 
-  @GET(UrlConfig.GET_SUBJECT_TITLE)
+  @GET(UrlConfig.GET_ONLINE_Seris)
+  Observable<OnlinePlayInfo> getOnlineSeris(@Query("type") String type, @Query("page") int page, @Query("pagesize") int pagesize);//获取专题列表
+
+
+    @GET(UrlConfig.GET_SUBJECT_TITLE)
   Observable<SubjectTitleInfo> getSubjectTitle(@Query("page") int page, @Query("pagesize") int pagesize);//获取专题列表
 
   @GET(UrlConfig.GETBTRECOMEND)

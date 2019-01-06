@@ -1,11 +1,10 @@
 package com.zmovie.app.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.KeyEvent;
 import android.view.View;
-import android.widget.FrameLayout;
 
 import com.owen.tab.TvTabLayout;
 import com.zmovie.app.R;
@@ -35,7 +34,7 @@ public class OnlineTabFragment extends BaseFragment {
 
     @Override
     int getLayoutId() {
-        return R.layout.online_tab_fragment;
+        return R.layout.online_mv_tab_fragment;
     }
 
     @Override
@@ -55,14 +54,19 @@ public class OnlineTabFragment extends BaseFragment {
                 "document","k4mv"};
         ArrayList<Fragment> list = new ArrayList<>();
         for (int i = 0; i < arr.length; i++) {
-            list.add(MovListFragment.newInstance(type[i]));
-            mTablayout.addTab(mTablayout.newTab().setText(arr[i]),i==0);
+            list.add(BTMovListFragment.newInstance(type[i]));
+            if (i==0){
+                mTablayout.addTab(mTablayout.newTab().setText(arr[i]),true);
+            }else {
+                mTablayout.addTab(mTablayout.newTab().setText(arr[i]));
+            }
+
         }
         PageAdapter adapter = new PageAdapter(getChildFragmentManager(),list,arr);
         mTablayout.setTabScrollMode(TabLayout.MODE_SCROLLABLE);
-        mTablayout.setupWithViewPager(mvpager);
-        mvpager.setOffscreenPageLimit(5);
         mvpager.setAdapter(adapter);
+        mvpager.setOffscreenPageLimit(5);
+        mTablayout.setupWithViewPager(mvpager);
 
     }
     public static OnlineTabFragment getInstance(){
@@ -75,5 +79,7 @@ public class OnlineTabFragment extends BaseFragment {
         }
         return onlineTabFragment;
     }
+
+
 
 }

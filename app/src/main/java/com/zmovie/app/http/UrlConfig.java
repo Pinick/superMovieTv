@@ -16,7 +16,7 @@ public class UrlConfig {
     public static final String GET_SUBJECT  = "ygcms/getSubject.php" ;
 
     //获取专题
-    public static final String GET_ONLINE  = "ygcms/getOnline.php" ;
+    public static final String GET_ONLINE  = "ygcms/getLineMovie.php" ;
 
     //获取专题
     public static final String GET_SUBJECT_TITLE  = "ygcms/getSubjectTitle.php" ;
@@ -24,6 +24,7 @@ public class UrlConfig {
     public static final String DOWNLOADBASEURL  = "https://www.bttt.la/" ;
 //    public static final String CHECK_UPDATE  = "update.json" ;
 
+    public static final String GET_ONLINE_Seris= "ygcms/getLineSeris.php";
     //获取首页标签
     public static final String GET_HOME_INFO ="text/movie_title.php";
 

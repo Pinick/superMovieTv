@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/share_loading_page_bg"
+    android:background="@drawable/bg_video_poster_blur3"
     android:layout_height="match_parent"
     tools:context=".HomeRootActivity">
 
@@ -12,13 +12,11 @@
     <com.owen.tab.TvTabLayout
         android:id="@+id/home_tab_layout"
         android:layout_width="520pt"
-        android:layout_height="60pt"
+        android:layout_height="40pt"
         android:layout_marginTop="20pt"
-        android:clipChildren="false"
         android:background="#00272727"
         app:tabIndicatorGravity="center"
-        android:clipToPadding="false"
-        android:layout_alignParentLeft="true"
+        android:layout_centerHorizontal="true"
         app:tabIndicatorHeight="4pt"
         app:tabIndicatorWidth="100pt"
         app:tabGravity="center"
@@ -26,7 +24,7 @@
         app:tabBackground="@drawable/selector_tab_bg"
         app:tabTextColor="@drawable/selector_tab_font_color"
         app:tabMinWidth="150pt"
-        app:tabIndicatorBackgroundHeight="100pt"
+        app:tabIndicatorBackgroundHeight="50pt"
         app:tabScrollMode="fixed"/>
 
     <FrameLayout

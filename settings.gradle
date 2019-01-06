@@ -1,1 +1,1 @@
-include ':library', ':thunder', ':app'
+include   ':app', ':playerlib', ':vivideo',':thunder'
