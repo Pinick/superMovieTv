@@ -34,7 +34,6 @@
         <item name="android:textColor">#ffffff</item>
         <item name="android:background">#33000000</item>
     </style>
-
     <style name="TwoWayView" parent="TwoWayViewBase">
         <item name="android:orientation">horizontal</item>
         <item name="android:scrollbars">none</item>

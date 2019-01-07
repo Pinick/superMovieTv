@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="290pt"
     android:background="@color/item_default_color"
-    app:rfl_radius="8pt"
+    app:rfl_radius="0pt"
     android:focusable="true"
     android:clickable="true">
 
@@ -30,14 +30,13 @@
             android:id="@+id/tv_changed"
             android:layout_width="match_parent"
             android:layout_height="46pt"
-            android:background="#fc252525"
-            android:textColor="#fff"
+            android:background="@drawable/item_tx_bg"
+            android:textColor="@drawable/selector_item_text_color"
             android:layout_gravity="bottom"
             android:gravity="center"
             android:singleLine="true"
             android:ellipsize="marquee"
-            android:padding="10pt"
             android:text="底部文本"
-            android:textSize="18pt"/>
+            android:textSize="20pt"/>
 
 </com.zmovie.app.RoundFrameLayout>

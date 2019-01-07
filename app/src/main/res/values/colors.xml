@@ -22,12 +22,13 @@
     <color name="titlestrip_text_color">#999999</color>
 
     <color name="item_border_color">#666666</color>
-    <color name="item_default_color">#ffffff</color>
-    <color name="item_pressed_color">#26d8fb</color>
-    <color name="item_activated_color">#26d8fb</color>
+    <color name="item_default_color">#999999</color>
+    <color name="item_pressed_color">#04a8da</color>
+    <color name="item_activated_color">#fafafa</color>
     <color name="green_99cc00">#99cc00</color>
     <color name="green_bright">#00ffe5</color>
     <color name="rectangle">#FF9900</color>
     <color name="windowBackground">#1c1c1c</color>
     <color name="tab_line_color">#00e7f7</color>
+    <color name="dark_blue_bg_color">#23262f</color>
 </resources>

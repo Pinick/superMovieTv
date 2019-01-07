@@ -7,12 +7,12 @@
     android:clipToPadding="false"
     android:layout_height="match_parent">
     <ImageView
-        android:layout_width="220pt"
-        android:layout_height="330pt"
+        android:layout_width="500pt"
+        android:layout_height="300pt"
         android:layout_marginLeft="50pt"
-        android:scaleType="centerCrop"
-        android:layout_marginTop="80pt"
+        android:layout_marginTop="70pt"
         android:id="@+id/detail_poster"
+        android:background="@drawable/share_loadingview_bg"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -30,17 +30,60 @@
     <TextView
         android:layout_toRightOf="@+id/detail_poster"
         android:layout_marginLeft="20pt"
-        android:layout_marginBottom="30pt"
-        android:layout_marginRight="100pt"
-        android:layout_width="match_parent"
-        android:padding="20pt"
+        android:layout_marginBottom="70pt"
+        android:layout_width="100pt"
         android:lines="3"
         android:layout_above="@+id/it_list"
-        android:ellipsize="end"
-        android:textColor="#e7ffffff"
+        android:textColor="#fff"
+        android:gravity="center"
+        android:background="@drawable/bt_shape_selector"
         android:id="@+id/detail_desc"
+        android:text="简介"
         android:focusable="true"
-        android:layout_height="120pt"/>
+        android:layout_height="40pt"/>
+    <TextView
+        android:layout_toRightOf="@+id/detail_poster"
+        android:layout_marginLeft="140pt"
+        android:layout_marginBottom="70pt"
+        android:layout_width="100pt"
+        android:lines="3"
+        android:layout_above="@+id/it_list"
+        android:textColor="#fff"
+        android:gravity="center"
+        android:background="@drawable/bt_shape_selector"
+        android:id="@+id/detail_favor"
+        android:text="收藏"
+        android:focusable="true"
+        android:layout_height="40pt"/>
+
+    <TextView
+        android:layout_toRightOf="@+id/detail_poster"
+        android:layout_marginLeft="260pt"
+        android:layout_marginBottom="70pt"
+        android:layout_width="100pt"
+        android:lines="3"
+        android:layout_above="@+id/it_list"
+        android:textColor="#fff"
+        android:gravity="center"
+        android:background="@drawable/bt_shape_selector"
+        android:id="@+id/detail_chose"
+        android:text="选集"
+        android:focusable="true"
+        android:layout_height="40pt"/>
+    <TextView
+        android:layout_toRightOf="@+id/detail_poster"
+        android:layout_marginLeft="260pt"
+        android:layout_marginBottom="70pt"
+        android:layout_width="100pt"
+        android:lines="3"
+        android:layout_above="@+id/it_list"
+        android:textColor="#fff"
+        android:gravity="center"
+        android:background="@drawable/bt_shape_selector"
+        android:id="@+id/detail_content"
+        android:visibility="invisible"
+        android:text="选集"
+        android:layout_height="40pt"/>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -53,19 +96,29 @@
         android:clipToPadding="false"
         android:layout_height="270pt">
 
+        <!--<com.owen.tvrecyclerview.widget.TvRecyclerView-->
+            <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+            <!--android:id="@+id/downlist"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="#000d557f"-->
+            <!--android:focusable="false"-->
+            <!--android:orientation="vertical"-->
+            <!--android:clipToPadding="false"-->
+            <!--android:clipChildren="false"-->
+            <!--android:focusableInTouchMode="false"-->
+            <!--app:tv_layoutManager="GridLayoutManager"-->
+            <!--app:tv_numColumns="1"-->
+            <!--app:tv_numRows="2"-->
+            <!--/>-->
         <com.owen.tvrecyclerview.widget.TvRecyclerView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/downlist"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#000d557f"
+            android:layout_height="100pt"
             android:focusable="true"
             android:orientation="vertical"
-            android:clipToPadding="false"
-            android:clipChildren="false"
-            app:tv_layoutManager="GridLayoutManager"
-            app:tv_numColumns="4"
-            app:tv_numRows="3"
-            />
+            app:tv_layoutManager="V7LinearLayoutManager"
+            android:padding="20pt"/>
     </FrameLayout>
 </RelativeLayout>

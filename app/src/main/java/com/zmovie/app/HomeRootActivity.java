@@ -41,11 +41,10 @@ public class HomeRootActivity extends FragmentActivity implements BaseFragment.F
 //            mFocusBorder = new FocusBorder.Builder().asDrawable().borderResId(R.drawable.focus).build(this);
             mFocusBorder = new FocusBorder.Builder()
                     .asColor()
-                    .borderRadius(0)
-                    .borderColor(getResources().getColor(R.color.item_default_color))
-                    .borderWidth(TypedValue.COMPLEX_UNIT_DIP, 3)
-                    .shadowColor(getResources().getColor(R.color.item_default_color))
+                    .borderWidth(TypedValue.COMPLEX_UNIT_DIP, 4)
+                    .borderColor(getResources().getColor(R.color.item_pressed_color))
                     .shadowWidth(TypedValue.COMPLEX_UNIT_DIP, 18)
+                    .borderRadius(0)
                     .build(this);
         }
         mTabLayout.addOnTabSelectedListener(new HomeTabSelectedListener());

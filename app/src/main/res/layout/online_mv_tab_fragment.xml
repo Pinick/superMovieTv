@@ -12,12 +12,11 @@
         android:layout_width="wrap_content"
         android:layout_height="40pt"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30pt"
+        android:layout_marginTop="10pt"
         app:tabIndicatorWidth="48dp"
         android:clipToPadding="false"
         android:clipChildren="false"
         android:paddingTop="4pt"
-        android:paddingBottom="4pt"
         android:paddingLeft="10pt"
         android:paddingRight="10pt"
         app:tabIndicatorHeight="4dp"
@@ -33,11 +32,9 @@
 
         />
     <android.support.v4.view.ViewPager
-        android:layout_marginTop="30pt"
+        android:layout_marginTop="10pt"
         android:id="@+id/mvpager"
-        android:clipChildren="false"
         android:nextFocusUp="@id/online_tab_layout"
-        android:clipToPadding="false"
         android:layout_width="match_parent"
         android:layout_below="@+id/online_tab_layout"
         android:layout_height="match_parent"/>

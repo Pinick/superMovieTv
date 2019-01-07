@@ -72,20 +72,7 @@ public class OnlineMovieFragment extends BaseFragment {
         }
         PageAdapter adapter = new PageAdapter(getChildFragmentManager(),list,arr);
         mTablayout.setTabScrollMode(TabLayout.MODE_SCROLLABLE);
-        mTablayout.addOnTabSelectedListener(new TvTabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TvTabLayout.Tab tab) {
-            }
 
-            @Override
-            public void onTabUnselected(TvTabLayout.Tab tab) {
-            }
-
-            @Override
-            public void onTabReselected(TvTabLayout.Tab tab) {
-
-            }
-        });
         mvpager.setAdapter(adapter);
         mvpager.setOffscreenPageLimit(5);
         mTablayout.setupWithViewPager(mvpager);

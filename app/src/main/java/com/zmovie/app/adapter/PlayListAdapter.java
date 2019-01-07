@@ -19,27 +19,21 @@ package com.zmovie.app.adapter;
 import android.content.Context;
 
 import com.zmovie.app.R;
-import com.zmovie.app.domain.DetailItemInfo;
-import com.zmovie.app.domain.PlayUrlBean;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
-public class PlayM3u8ItemAdapter extends CommonRecyclerViewAdapter<PlayUrlBean.M3u8Bean> {
-    public PlayM3u8ItemAdapter(Context context) {
+public class PlayListAdapter extends CommonRecyclerViewAdapter<String> {
+
+    public PlayListAdapter(Context context, boolean isV7) {
         super(context);
     }
 
     @Override
     public int getItemLayoutId(int viewType) {
-        return R.layout.play_item;
+        return  R.layout.play_item;
     }
 
     @Override
-    public void onBindItemHolder(CommonRecyclerViewHolder helper, PlayUrlBean.M3u8Bean item, int position) {
-        helper.getHolder()
-                .setText(R.id.title,item.getTitle())
-        ;
+    public void onBindItemHolder(CommonRecyclerViewHolder helper, String item, int position) {
+        helper.getHolder().setText(R.id.title, item);
     }
 }

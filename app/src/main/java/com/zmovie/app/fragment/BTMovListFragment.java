@@ -75,15 +75,7 @@ public class BTMovListFragment extends BaseFragment implements IMoview {
         setScrollListener(mRecyclerView);
 
         mRecyclerView.setOnItemListener(listener);
-        mRecyclerView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (mFocusBorder!=null){
-                    mFocusBorder.setVisible(hasFocus);
-                }
 
-            }
-        });
 
         mRecyclerView.setOnLoadMoreListener(new TvRecyclerView.OnLoadMoreListener() {
             @Override
@@ -109,8 +101,7 @@ public class BTMovListFragment extends BaseFragment implements IMoview {
 
         @Override
         public void onItemSelected(TvRecyclerView parent, View itemView, int position) {
-            float radius = DisplayAdaptive.getInstance().toLocalPx(10);
-            onMoveFocusBorder(itemView, 1.1f, radius);
+            onMoveFocusBorder(itemView, 1.2f, 0);
         }
 
         @Override
@@ -125,7 +116,6 @@ public class BTMovListFragment extends BaseFragment implements IMoview {
                     intent.putExtra(GlobalMsg.KEY_MOVIE_DOWN_ITEM_TITLE, info.getData().get(position).getDowndtitle());
                     intent.putExtra(GlobalMsg.KEY_MOVIE_DETAIL,info.getData().get(position).getMvdesc());
                     getActivity().startActivity(intent);
-//                        showToast("onItemClick::"+position);
                 }
             }
         }

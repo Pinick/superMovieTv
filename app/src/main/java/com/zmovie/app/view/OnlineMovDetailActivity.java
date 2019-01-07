@@ -18,6 +18,10 @@ import com.google.gson.Gson;
 import com.owen.tvrecyclerview.widget.SimpleOnItemListener;
 import com.owen.tvrecyclerview.widget.TvRecyclerView;
 import com.zmovie.app.R;
+import com.zmovie.app.adapter.CommonRecyclerViewAdapter;
+import com.zmovie.app.adapter.CommonRecyclerViewHolder;
+import com.zmovie.app.adapter.ListAdapter;
+import com.zmovie.app.adapter.PlayListAdapter;
 import com.zmovie.app.adapter.PlayM3u8ItemAdapter;
 import com.zmovie.app.data.GlobalMsg;
 import com.zmovie.app.display.DisplayAdaptive;
@@ -25,6 +29,7 @@ import com.zmovie.app.domain.DescBean;
 import com.zmovie.app.domain.PlayUrlBean;
 import com.zmovie.app.focus.FocusBorder;
 
+import java.util.ArrayList;
 
 
 /**
@@ -87,7 +92,6 @@ public class OnlineMovDetailActivity extends Activity {
             mDescHeader.append(descBean.getHeader_key().get(i)+descBean.getHeader_value().get(i)+"\n");
         }
 
-        tvDescription.setText(mDescHeader.toString());
         tvDescription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,29 +100,65 @@ public class OnlineMovDetailActivity extends Activity {
                 descDialog.show();
             }
         });
-        tvDescription.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                if (b){
-                    float radius = DisplayAdaptive.getInstance().toLocalPx(0);
-                    onMoveFocusBorder(view, 1.0f, radius);
-                }
-            }
-        });
+
 
 
         playUrlBean = gson.fromJson(downUrl, PlayUrlBean.class);
+        ArrayList<String> playM3u8List = new ArrayList<>();
 
-        //播放列表
-        PlayM3u8ItemAdapter adapter = new PlayM3u8ItemAdapter(this);
-        if (playUrlBean !=null){
-            adapter.setDatas(playUrlBean.getM3u8());
-            recyclerView.setAdapter(adapter);
+        for (int i = 0; i < playUrlBean.getM3u8().size(); i++) {
+            playM3u8List.add("第"+i+"集");
         }
 
+        final PlayListAdapter mAdapter = new PlayListAdapter(OnlineMovDetailActivity.this, false);
+        mAdapter.setDatas(playM3u8List);
+        //播放列表
+//        PlayM3u8ItemAdapter adapter = new PlayM3u8ItemAdapter(this);
+//        if (playUrlBean !=null){
+//            adapter.setDatas(playUrlBean.getM3u8());
+//            recyclerView.setAdapter(adapter);
+//        }
 
+        recyclerView.setAdapter(new CommonRecyclerViewAdapter(OnlineMovDetailActivity.this) {
+            @Override
+            public int getItemLayoutId(int viewType) {
+                return R.layout.item_nested_recyclerview;
+            }
 
-        Glide.with(this).load(posterUrl).placeholder(R.drawable.mv_place_holder).into(poster);
+            @Override
+            public int getItemCount() {
+                return 2;
+            }
+
+            @Override
+            public void onBindItemHolder(CommonRecyclerViewHolder helper, Object item, int position) {
+                TvRecyclerView recyclerView = helper.getHolder().getView(R.id.nestlist);
+                recyclerView.setSpacingWithMargins(10, 10);
+                recyclerView.setAdapter(mAdapter);
+                recyclerView.setSelectedItemAtCentered(true);
+
+                recyclerView.setOnItemListener(new TvRecyclerView.OnItemListener() {
+                    @Override
+                    public void onItemPreSelected(TvRecyclerView parent, View itemView, int position) {
+
+                    }
+
+                    @Override
+                    public void onItemSelected(TvRecyclerView parent, View itemView, int position) {
+                        onMoveFocusBorder(itemView, 1.1f, 0);
+                    }
+
+                    @Override
+                    public void onItemClick(TvRecyclerView parent, View itemView, int position) {
+
+                    }
+                });
+
+            }
+
+        });
+
+        //Glide.with(this).load(posterUrl).placeholder(R.drawable.mv_place_holder).into(poster);
     }
 
 

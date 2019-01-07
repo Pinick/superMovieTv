@@ -1,52 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zmovie.app.RoundFrameLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="98pt"
-    android:background="@color/item_default_color"
-    app:rfl_radius="0pt"
+    android:layout_width="102pt"
     android:focusable="true"
-    android:clickable="true">
-    <RelativeLayout
+    android:clickable="true"
+    android:layout_height="48pt"
+    >
+    <TextView
+        android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-            <ImageView
-                android:id="@+id/image"
-                android:scaleType="centerCrop"
-                android:layout_width="30pt"
-                android:layout_marginLeft="10pt"
-                android:layout_marginTop="10pt"
-                android:layout_height="30pt"/>
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@+id/image"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10pt"
+        android:text="影片名称"
+        android:layout_marginLeft="10pt"
+        android:background="@drawable/item_tx_bg"
+        android:textColor="@drawable/selector_item_text_color"
+        android:textSize="22pt"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:textStyle="bold"/>
 
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_toRightOf="@+id/image"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="10pt"
-                android:text="影片名称"
-                android:layout_marginLeft="10pt"
-                android:textSize="22pt"
-                android:singleLine="true"
-                android:ellipsize="marquee"
-                android:textStyle="bold"/>
 
-            <TextView
-                android:id="@+id/d_tv_changed"
-                android:layout_width="match_parent"
-                android:layout_alignParentBottom="true"
-                android:layout_height="26pt"
-                android:background="#307eae"
-                android:textColor="#fff"
-                android:layout_gravity="bottom"
-                android:gravity="center"
-                android:singleLine="true"
-                android:paddingLeft="10pt"
-                android:paddingRight="10pt"
-                android:text="底部文本"
-                android:textSize="18pt"/>
-    </RelativeLayout>
-
-</com.zmovie.app.RoundFrameLayout>
+</FrameLayout>

@@ -14,6 +14,7 @@
         android:layout_height="match_parent"
         android:paddingLeft="20pt"
         android:paddingRight="20pt"
+        android:paddingTop="30pt"
         android:background="#00e1e1e1"
         android:layout_weight="1"
         app:tv_loadMoreBeforehandCount="14"
