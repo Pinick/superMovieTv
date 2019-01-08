@@ -98,6 +98,9 @@ public class PlayerHelper {
     };
 
     public void startPlay(String url, String title) {
+        if (ijkVideoView!=null&&ijkVideoView.isPlaying()){
+            ijkVideoView.stopPlayback();
+        }
         if (ijkVideoView!=null){
             ijkVideoView.setUrl(url);
             ijkVideoView.setTitle(title);
