@@ -52,10 +52,6 @@ public class OnlineMovieFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView();
-
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(Params.ACTION_RESET_POSITION);
-        getContext().registerReceiver(receiver,filter);
     }
 
     private void initView() {
@@ -93,21 +89,9 @@ public class OnlineMovieFragment extends BaseFragment {
         return onlineTabFragment;
     }
 
-    BroadcastReceiver receiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(Params.ACTION_RESET_POSITION)) {
-              if (mTablayout!=null){
-                  mTablayout.getSelectedTab().getTabView().requestFocus();
-                  onMoveFocusBorder(mTablayout.getSelectedTab().getTabView(),1.2f,0);
-              }
-            }
-        }
-    };
 
     @Override
     public void onDetach() {
         super.onDetach();
-        getContext().unregisterReceiver(receiver);
     }
 }

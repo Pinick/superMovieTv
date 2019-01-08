@@ -3,9 +3,11 @@ package com.zmovie.app.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -57,9 +59,9 @@ public class OnlineMovDetailActivity extends Activity {
     private PlayUrlBean playUrlBean;
     private TvRecyclerView recyclerView2;
     private TextView shortDesc;
-    private TextView btdesct;
     private PlayerHelper playerHelper;
     private View fullScreen;
+    private View descView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,10 +90,13 @@ public class OnlineMovDetailActivity extends Activity {
         titleView.setText(title);
         if (!TextUtils.isEmpty(descBean.getDesc())){
             shortDesc.setText("简介："+descBean.getDesc());
-            btdesct.setVisibility(View.GONE);
         }else {
-            shortDesc.setVisibility(View.GONE);
-            btdesct.setVisibility(View.VISIBLE);
+            for (int i = 0; i < descBean.getHeader_key().size(); i++) {
+                if (descBean.getHeader_key().get(i).contains("演员")){
+                    shortDesc.setText("主演："+descBean.getHeader_value().get(i));
+                }
+            }
+
         }
 
         //海报右边的短简介
@@ -103,7 +108,7 @@ public class OnlineMovDetailActivity extends Activity {
             mDescHeader.append(descBean.getHeader_key().get(i)+descBean.getHeader_value().get(i)+"\n");
         }
 
-        tvDescription.setOnClickListener(new View.OnClickListener() {
+        descView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DescMovieDialog descDialog = new DescMovieDialog(OnlineMovDetailActivity.this,1);
@@ -111,7 +116,7 @@ public class OnlineMovDetailActivity extends Activity {
                 descDialog.show();
             }
         });
-        btdesct.setOnClickListener(new View.OnClickListener() {
+        tvDescription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DescMovieDialog descDialog = new DescMovieDialog(OnlineMovDetailActivity.this,1);
@@ -132,6 +137,7 @@ public class OnlineMovDetailActivity extends Activity {
         for (int i = 0; i < playUrlBean.getM3u8().size(); i++) {
             playM3u8List.add("第"+(i+1)+"集");
         }
+        Log.e("playurllist",playUrlBean.getM3u8().size()+"");
 
         final PlayListAdapter mAdapter = new PlayListAdapter(OnlineMovDetailActivity.this, false);
         mAdapter.setDatas(playM3u8List);
@@ -148,7 +154,10 @@ public class OnlineMovDetailActivity extends Activity {
                 }
             }
         });
-        playerHelper.startPlay(playUrlBean.getM3u8().get(0).getUrl(),playUrlBean.getM3u8().get(0).getTitle());
+        if (playUrlBean.getM3u8()!=null){
+            playerHelper.startPlay(playUrlBean.getM3u8().get(0).getUrl(),playUrlBean.getM3u8().get(0).getTitle());
+        }
+        recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         recyclerView.setAdapter(mAdapter);
         recyclerView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -175,6 +184,7 @@ public class OnlineMovDetailActivity extends Activity {
                     .build(this);
         }
         ijkplayer = findViewById(R.id.video_view);
+        descView = findViewById(R.id.show_desc);
         //全屏按钮
         fullScreen = findViewById(R.id.fullscreen_view);
         fullScreen.setOnClickListener(new View.OnClickListener() {
@@ -183,10 +193,19 @@ public class OnlineMovDetailActivity extends Activity {
                 playerHelper.makeFullscreen();
             }
         });
+        fullScreen.requestFocus();
+        fullScreen.setNextFocusLeftId(R.id.fullscreen_view);
 
         shortDesc = findViewById(R.id.desc_short);
+        shortDesc.setNextFocusLeftId(R.id.desc_short);
+
+
         recyclerView = findViewById(R.id.downlist);
         recyclerView2 = findViewById(R.id.downlist2);
+
+        if (recyclerView.getChildAt(0)!=null){
+            recyclerView.getChildAt(0).setNextFocusUpId(R.id.fullscreen_view);
+        }
         recyclerView.setSpacingWithMargins(12, 20);
         recyclerView2.setSpacingWithMargins(12,20);
 
@@ -201,8 +220,6 @@ public class OnlineMovDetailActivity extends Activity {
 
             @Override
             public void onItemSelected(TvRecyclerView parent, View itemView, int position) {
-                float radius = DisplayAdaptive.getInstance().toLocalPx(4);
-                onMoveFocusBorder(itemView, 1.1f, radius);
             }
 
             @Override
@@ -214,8 +231,6 @@ public class OnlineMovDetailActivity extends Activity {
 
             @Override
             public void onItemSelected(TvRecyclerView parent, View itemView, int position) {
-                float radius = DisplayAdaptive.getInstance().toLocalPx(4);
-                onMoveFocusBorder(itemView, 1.1f, radius);
             }
 
             @Override
@@ -227,7 +242,6 @@ public class OnlineMovDetailActivity extends Activity {
             }
         });
         tvDescription = findViewById(R.id.desc_short);
-        btdesct = findViewById(R.id.detail_desc);
 
     }
     protected void onMoveFocusBorder(View focusedView, float scale, float roundRadius) {
@@ -268,4 +282,16 @@ public class OnlineMovDetailActivity extends Activity {
         ijkplayer.pause();
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+
+        if (ijkplayer.isFullScreen()){
+            playerHelper.onKeyEvent(keyCode,event);
+            return true;
+        }
+
+
+        return super.onKeyDown(keyCode, event);
+    }
 }

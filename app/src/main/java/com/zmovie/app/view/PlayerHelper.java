@@ -2,12 +2,14 @@ package com.zmovie.app.view;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.KeyEvent;
 
 import com.dueeeke.videoplayer.player.IjkPlayer;
 import com.dueeeke.videoplayer.player.PlayerConfig;
 import com.huangyong.playerlib.CustomControler;
 import com.huangyong.playerlib.CustomIjkplayer;
 import com.huangyong.playerlib.PlayerActivity;
+import com.zmovie.app.R;
 
 import tv.danmaku.ijk.media.player.IjkMediaPlayer;
 
@@ -26,10 +28,11 @@ public class PlayerHelper {
         this.ijkVideoView = ijkVideoView;
 
         controller = new CustomControler(context);
-        controller.getThumb().setImageResource(com.huangyong.playerlib.R.drawable.preview_bg);
+        controller.getThumb().setImageResource(R.drawable.share_loadingview_bg);
+        controller.setFocusable(false);
         controller.setOnCheckListener(listener );
         ijkVideoView.setVideoController(controller);
-
+        ijkVideoView.setFocusable(false);
         IjkPlayer ijkPlayer = new IjkPlayer(context) {
             @Override
             public void setEnableMediaCodec(boolean isEnable) {
@@ -111,12 +114,24 @@ public class PlayerHelper {
     public void makeFullscreen(){
         if (ijkVideoView!=null&&!ijkVideoView.isFullScreen()){
             ijkVideoView.startFullScreen();
+            ijkVideoView.setFocusable(true);
+            ijkVideoView.requestFocus();
         }
     }
 
     public void cancelFullscreen(){
         if (ijkVideoView!=null&&ijkVideoView.isFullScreen()){
             ijkVideoView.stopFullScreen();
+            ijkVideoView.setFocusable(false);
         }
+    }
+
+
+
+    public void onKeyEvent(int keyCode, KeyEvent event) {
+        if (controller==null){
+            return;
+        }
+        controller.onKeyDown(keyCode,event);
     }
 }

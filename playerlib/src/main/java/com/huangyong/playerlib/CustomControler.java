@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +44,6 @@ public class CustomControler extends GestureVideoController implements View.OnCl
     protected LinearLayout mBottomContainer, mTopContainer;
     protected SeekBar mVideoProgress;
     protected ImageView mBackButton;
-    protected ImageView mLockButton;
     protected MarqueeTextView mTitle;
     private boolean mIsLive;
     private boolean mIsDragging;
@@ -92,8 +92,6 @@ public class CustomControler extends GestureVideoController implements View.OnCl
         mCurrTime = mControllerView.findViewById(R.id.curr_time);
         mBackButton = mControllerView.findViewById(R.id.back);
         mBackButton.setOnClickListener(this);
-        mLockButton = mControllerView.findViewById(R.id.lock);
-        mLockButton.setOnClickListener(this);
         mThumb = mControllerView.findViewById(R.id.thumb);
         mThumb.setOnClickListener(this);
         mPlayButton = mControllerView.findViewById(R.id.iv_play);
@@ -166,7 +164,6 @@ public class CustomControler extends GestureVideoController implements View.OnCl
                 mIsGestureEnabled = false;
                 mFullScreenButton.setSelected(false);
                 mBackButton.setVisibility(View.GONE);
-                mLockButton.setVisibility(View.GONE);
                 mTitle.setVisibility(View.INVISIBLE);
                 mSysTime.setVisibility(View.GONE);
                 mBatteryLevel.setVisibility(View.GONE);
@@ -182,10 +179,8 @@ public class CustomControler extends GestureVideoController implements View.OnCl
                 mSysTime.setVisibility(View.VISIBLE);
                 mBatteryLevel.setVisibility(View.VISIBLE);
                 if (mShowing) {
-                    mLockButton.setVisibility(View.VISIBLE);
                     mTopContainer.setVisibility(View.VISIBLE);
                 } else {
-                    mLockButton.setVisibility(View.GONE);
                 }
                 break;
         }
@@ -199,7 +194,6 @@ public class CustomControler extends GestureVideoController implements View.OnCl
                 L.e("STATE_IDLE");
                 hide();
                 mIsLocked = false;
-                mLockButton.setSelected(false);
                 mMediaPlayer.setLock(false);
                 mBottomProgress.setProgress(0);
                 mBottomProgress.setSecondaryProgress(0);
@@ -223,7 +217,7 @@ public class CustomControler extends GestureVideoController implements View.OnCl
             case IjkVideoView.STATE_PAUSED:
                 L.e("STATE_PAUSED");
                 mPlayButton.setSelected(false);
-                mStartPlayButton.setVisibility(View.GONE);
+                mStartPlayButton.setVisibility(View.VISIBLE);
                 break;
             case IjkVideoView.STATE_PREPARING:
                 L.e("STATE_PREPARING");
@@ -279,13 +273,11 @@ public class CustomControler extends GestureVideoController implements View.OnCl
             mShowing = false;
             mIsGestureEnabled = true;
             show();
-            mLockButton.setSelected(false);
             Toast.makeText(getContext(), R.string.dkplayer_unlocked, Toast.LENGTH_SHORT).show();
         } else {
             hide();
             mIsLocked = true;
             mIsGestureEnabled = false;
-            mLockButton.setSelected(true);
             Toast.makeText(getContext(), R.string.dkplayer_locked, Toast.LENGTH_SHORT).show();
         }
         mMediaPlayer.setLock(mIsLocked);
@@ -336,7 +328,6 @@ public class CustomControler extends GestureVideoController implements View.OnCl
     public void hide() {
         if (mShowing) {
             if (mMediaPlayer.isFullScreen()) {
-                mLockButton.setVisibility(View.GONE);
                 if (!mIsLocked) {
                     hideAllViews();
                 }
@@ -371,7 +362,6 @@ public class CustomControler extends GestureVideoController implements View.OnCl
             mSysTime.setText(getCurrentSystemTime());
         if (!mShowing) {
             if (mMediaPlayer.isFullScreen()) {
-                mLockButton.setVisibility(View.VISIBLE);
                 if (!mIsLocked) {
                     showAllViews();
                 }
@@ -388,9 +378,16 @@ public class CustomControler extends GestureVideoController implements View.OnCl
         removeCallbacks(mFadeOut);
         if (timeout != 0) {
             postDelayed(mFadeOut, timeout);
+
         }
     }
 
+    private Runnable hideCenterView = new Runnable() {
+        @Override
+        public void run() {
+            CustomControler.super.mCenterView.setVisibility(GONE);
+        }
+    };
     private void showAllViews() {
         mBottomContainer.setVisibility(View.VISIBLE);
         mBottomContainer.startAnimation(mShowAnim);
@@ -454,6 +451,8 @@ public class CustomControler extends GestureVideoController implements View.OnCl
         }
     }
 
+
+
     public ImageView getThumb() {
         return mThumb;
     }
@@ -494,13 +493,45 @@ public class CustomControler extends GestureVideoController implements View.OnCl
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-
+        if (keyCode==KeyEvent.KEYCODE_BACK){
+            if (mMediaPlayer!=null)
+            mMediaPlayer.stopFullScreen();
+        }
         if (keyCode==KeyEvent.KEYCODE_ENTER){
+            Log.e("keyeventlog","确定键");
+            doPauseResume();
+
+            show();
 
         }
-
-
-
+        if (keyCode==KeyEvent.KEYCODE_DPAD_RIGHT){
+            slideToChangePosition(-300);
+            postDelayed(hideCenterView,1000);
+            if (mNeedSeek) {
+                mMediaPlayer.seekTo((long)mPosition);
+                mNeedSeek = false;
+            }
+            show();
+        }
+        if (keyCode==KeyEvent.KEYCODE_DPAD_LEFT){
+            slideToChangePosition(300);
+            if (mNeedSeek) {
+                mMediaPlayer.seekTo((long)mPosition);
+                mNeedSeek = false;
+            }
+            postDelayed(hideCenterView,1000);
+            show();
+        }
+        if (keyCode==KeyEvent.KEYCODE_MENU){
+            Log.e("keyeventlog","菜单键");
+            toggleSpeed();
+        }
+        if (keyCode==KeyEvent.KEYCODE_DPAD_UP){
+            Log.e("keyeventlog","上键");
+        }
+        if (keyCode==KeyEvent.KEYCODE_DPAD_DOWN){
+            Log.e("keyeventlog","下键");
+        }
         return super.onKeyDown(keyCode, event);
     }
 }
