@@ -1,6 +1,5 @@
 package com.zmovie.app.view;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -97,7 +96,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                     .borderRadius(0)
                     .build(this);
         }
-        poster = findViewById(R.id.detail_poster);
+        poster = findViewById(R.id.video_view);
         recyclerView = findViewById(R.id.downlist);
         recyclerView.setSpacingWithMargins(12, 20);
         titleView = findViewById(R.id.detai_title);

@@ -51,6 +51,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:adapter-rxjava:2.3.0'
     implementation 'com.owen:tv-tablayout:1.0.1'
     implementation 'com.owen:tv-recyclerview:2.0.1'
+    implementation 'com.owen:tv-widget:1.0.1'
+    implementation 'com.henryblue.library:tvrecyclerview:1.2.1'
     //    implementation(name: 'tv-tablayout-release2', ext: 'aar')
     implementation project(':playerlib')
     implementation project(':vivideo')

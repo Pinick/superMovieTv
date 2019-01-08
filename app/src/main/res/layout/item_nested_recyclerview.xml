@@ -4,8 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nestlist"
     android:layout_width="match_parent"
-    android:layout_height="100pt"
-    android:orientation="horizontal"
+    android:layout_height="40pt"
     android:focusable="true"
+    android:orientation="horizontal"
     app:tv_layoutManager="V7LinearLayoutManager"
     android:padding="20pt"/>

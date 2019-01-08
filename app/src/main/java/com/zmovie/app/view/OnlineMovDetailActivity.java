@@ -3,26 +3,24 @@ package com.zmovie.app.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bftv.myapplication.config.KeyParam;
-import com.bftv.myapplication.view.LineWebview;
-import com.bumptech.glide.Glide;
+import com.bftv.myapplication.view.OnLinePlayerWebview;
 import com.google.gson.Gson;
+import com.huangyong.playerlib.CustomIjkplayer;
+import com.huangyong.playerlib.Params;
+import com.huangyong.playerlib.PlayerActivity;
 import com.owen.tvrecyclerview.widget.SimpleOnItemListener;
 import com.owen.tvrecyclerview.widget.TvRecyclerView;
 import com.zmovie.app.R;
-import com.zmovie.app.adapter.CommonRecyclerViewAdapter;
-import com.zmovie.app.adapter.CommonRecyclerViewHolder;
-import com.zmovie.app.adapter.ListAdapter;
 import com.zmovie.app.adapter.PlayListAdapter;
-import com.zmovie.app.adapter.PlayM3u8ItemAdapter;
 import com.zmovie.app.data.GlobalMsg;
 import com.zmovie.app.display.DisplayAdaptive;
 import com.zmovie.app.domain.DescBean;
@@ -53,10 +51,15 @@ public class OnlineMovDetailActivity extends Activity {
     private String[] items;
     private String playUrl;
     private String playTitle;
-    private ImageView poster;
+    private CustomIjkplayer ijkplayer;
     private String descContent;
     private FocusBorder mFocusBorder;
     private PlayUrlBean playUrlBean;
+    private TvRecyclerView recyclerView2;
+    private TextView shortDesc;
+    private TextView btdesct;
+    private PlayerHelper playerHelper;
+    private View fullScreen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +85,14 @@ public class OnlineMovDetailActivity extends Activity {
 
         Gson gson = new Gson();
         final DescBean descBean = gson.fromJson(movDescription, DescBean.class);
+        titleView.setText(title);
+        if (!TextUtils.isEmpty(descBean.getDesc())){
+            shortDesc.setText("简介："+descBean.getDesc());
+            btdesct.setVisibility(View.GONE);
+        }else {
+            shortDesc.setVisibility(View.GONE);
+            btdesct.setVisibility(View.VISIBLE);
+        }
 
         //海报右边的短简介
         final StringBuilder mDescHeader = new StringBuilder();
@@ -100,65 +111,55 @@ public class OnlineMovDetailActivity extends Activity {
                 descDialog.show();
             }
         });
+        btdesct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DescMovieDialog descDialog = new DescMovieDialog(OnlineMovDetailActivity.this,1);
+                descDialog.setDescData(mDescHeader.toString()+descBean.getDesc(),posterUrl);
+                descDialog.show();
+            }
+        });
 
 
 
         playUrlBean = gson.fromJson(downUrl, PlayUrlBean.class);
         ArrayList<String> playM3u8List = new ArrayList<>();
+        ArrayList<String> playWebUrlList = new ArrayList<>();
 
+        for (int i = 0; i < playUrlBean.getNormal().size(); i++) {
+            playWebUrlList.add("第"+(i+1)+"集");
+        }
         for (int i = 0; i < playUrlBean.getM3u8().size(); i++) {
-            playM3u8List.add("第"+i+"集");
+            playM3u8List.add("第"+(i+1)+"集");
         }
 
         final PlayListAdapter mAdapter = new PlayListAdapter(OnlineMovDetailActivity.this, false);
         mAdapter.setDatas(playM3u8List);
-        //播放列表
-//        PlayM3u8ItemAdapter adapter = new PlayM3u8ItemAdapter(this);
-//        if (playUrlBean !=null){
-//            adapter.setDatas(playUrlBean.getM3u8());
-//            recyclerView.setAdapter(adapter);
-//        }
+        final PlayListAdapter mNormalAdapter = new PlayListAdapter(OnlineMovDetailActivity.this, false);
+        mNormalAdapter.setDatas(playWebUrlList);
 
-        recyclerView.setAdapter(new CommonRecyclerViewAdapter(OnlineMovDetailActivity.this) {
+        recyclerView2.setAdapter(mNormalAdapter);
+        recyclerView2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public int getItemLayoutId(int viewType) {
-                return R.layout.item_nested_recyclerview;
+            public void onFocusChange(View v, boolean hasFocus) {
+                Log.i("qq", "onFocusChange1==> " +hasFocus);
+                if(!hasFocus) {
+                    mFocusBorder.setVisible(false);
+                }
             }
-
-            @Override
-            public int getItemCount() {
-                return 2;
-            }
-
-            @Override
-            public void onBindItemHolder(CommonRecyclerViewHolder helper, Object item, int position) {
-                TvRecyclerView recyclerView = helper.getHolder().getView(R.id.nestlist);
-                recyclerView.setSpacingWithMargins(10, 10);
-                recyclerView.setAdapter(mAdapter);
-                recyclerView.setSelectedItemAtCentered(true);
-
-                recyclerView.setOnItemListener(new TvRecyclerView.OnItemListener() {
-                    @Override
-                    public void onItemPreSelected(TvRecyclerView parent, View itemView, int position) {
-
-                    }
-
-                    @Override
-                    public void onItemSelected(TvRecyclerView parent, View itemView, int position) {
-                        onMoveFocusBorder(itemView, 1.1f, 0);
-                    }
-
-                    @Override
-                    public void onItemClick(TvRecyclerView parent, View itemView, int position) {
-
-                    }
-                });
-
-            }
-
         });
-
-        //Glide.with(this).load(posterUrl).placeholder(R.drawable.mv_place_holder).into(poster);
+        playerHelper.startPlay(playUrlBean.getM3u8().get(0).getUrl(),playUrlBean.getM3u8().get(0).getTitle());
+        recyclerView.setAdapter(mAdapter);
+        recyclerView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                Log.i("qq", "onFocusChange1==> " +hasFocus);
+                if(!hasFocus) {
+                    mFocusBorder.setVisible(false);
+                }
+            }
+        });
+        //Glide.with(this).load(posterUrl).placeholder(R.drawable.mv_place_holder).into(ijkplayer);
     }
 
 
@@ -173,34 +174,98 @@ public class OnlineMovDetailActivity extends Activity {
                     .borderRadius(0)
                     .build(this);
         }
-        poster = findViewById(R.id.detail_poster);
+        ijkplayer = findViewById(R.id.video_view);
+        //全屏按钮
+        fullScreen = findViewById(R.id.fullscreen_view);
+        fullScreen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                playerHelper.makeFullscreen();
+            }
+        });
+
+        shortDesc = findViewById(R.id.desc_short);
         recyclerView = findViewById(R.id.downlist);
+        recyclerView2 = findViewById(R.id.downlist2);
         recyclerView.setSpacingWithMargins(12, 20);
+        recyclerView2.setSpacingWithMargins(12,20);
+
+        //播放器
+        playerHelper = new PlayerHelper();
+        playerHelper.init(this,title,ijkplayer);
+
+
         titleView = findViewById(R.id.detai_title);
-        titleView.setText(title);
+
         recyclerView.setOnItemListener(new SimpleOnItemListener() {
 
             @Override
             public void onItemSelected(TvRecyclerView parent, View itemView, int position) {
-                float radius = DisplayAdaptive.getInstance().toLocalPx(0);
+                float radius = DisplayAdaptive.getInstance().toLocalPx(4);
                 onMoveFocusBorder(itemView, 1.1f, radius);
             }
 
             @Override
             public void onItemClick(TvRecyclerView parent, View itemView, int position) {
-                Intent intent = new Intent(OnlineMovDetailActivity.this, LineWebview.class);
+                playerHelper.startPlay(playUrlBean.getM3u8().get(0).getUrl(),playUrlBean.getM3u8().get(0).getTitle());
+            }
+        });
+        recyclerView2.setOnItemListener(new SimpleOnItemListener() {
+
+            @Override
+            public void onItemSelected(TvRecyclerView parent, View itemView, int position) {
+                float radius = DisplayAdaptive.getInstance().toLocalPx(4);
+                onMoveFocusBorder(itemView, 1.1f, radius);
+            }
+
+            @Override
+            public void onItemClick(TvRecyclerView parent, View itemView, int position) {
+                Intent intent = new Intent(OnlineMovDetailActivity.this, OnLinePlayerWebview.class);
                 intent.putExtra(KeyParam.PLAYURL,playUrlBean.getNormal().get(position).getUrl());
                 startActivity(intent);
 
             }
         });
-        tvDescription = findViewById(R.id.detail_desc);
+        tvDescription = findViewById(R.id.desc_short);
+        btdesct = findViewById(R.id.detail_desc);
 
     }
     protected void onMoveFocusBorder(View focusedView, float scale, float roundRadius) {
         if(null != mFocusBorder) {
             mFocusBorder.onFocus(focusedView, FocusBorder.OptionsFactory.get(scale, scale, roundRadius));
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if (ijkplayer.isFullScreen()){
+            playerHelper.cancelFullscreen();
+            return;
+        }
+        if (ijkplayer.isPlaying()){
+            ijkplayer.stopPlayback();
+        }
+//        if ((System.currentTimeMillis() - mExitTime) > 2000) {
+//            Toast.makeText(this, "再按一次退出噢", Toast.LENGTH_SHORT).show();
+//            mExitTime = System.currentTimeMillis();
+//        } else {
+//            finish();
+//            overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
+//        }
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ijkplayer.resume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        ijkplayer.pause();
     }
 
 }

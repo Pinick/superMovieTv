@@ -159,7 +159,14 @@ public class OnlineMovListFragment extends BaseFragment implements IOnlineView {
             if (intent.getAction().equals(Params.ACTION_RESET_POSITION)) {
                 if (mRecyclerView!=null){
 
-                    mRecyclerView.setSelectionWithSmooth(0);
+                    mRecyclerView.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            mRecyclerView.setSelectionWithSmooth(0);
+                        }
+                    },200);
+
+
                 }
 
             }

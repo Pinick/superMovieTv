@@ -7,12 +7,14 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.TypedValue;
 import android.view.View;
 
 import com.huangyong.playerlib.Params;
 import com.owen.tab.TvTabLayout;
 import com.zmovie.app.R;
 import com.zmovie.app.adapter.PageAdapter;
+import com.zmovie.app.focus.FocusBorder;
 import com.zmovie.app.tablayout.TabLayout;
 
 import java.util.ArrayList;
@@ -57,6 +59,7 @@ public class OnlineMovieFragment extends BaseFragment {
     }
 
     private void initView() {
+
         String[] arr = { "科幻","喜剧","爱情","战争","剧情","恐怖",
                 "综艺"};
         String[] type = {"science","comedy","love","war","story","terror","show"};
@@ -96,6 +99,7 @@ public class OnlineMovieFragment extends BaseFragment {
             if (intent.getAction().equals(Params.ACTION_RESET_POSITION)) {
               if (mTablayout!=null){
                   mTablayout.getSelectedTab().getTabView().requestFocus();
+                  onMoveFocusBorder(mTablayout.getSelectedTab().getTabView(),1.2f,0);
               }
             }
         }

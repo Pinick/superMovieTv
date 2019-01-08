@@ -6,13 +6,21 @@
     android:clipChildren="false"
     android:clipToPadding="false"
     android:layout_height="match_parent">
-    <ImageView
+    <!--<ImageView-->
+        <!--android:layout_width="500pt"-->
+        <!--android:layout_height="300pt"-->
+        <!--android:layout_marginLeft="50pt"-->
+        <!--android:layout_marginTop="70pt"-->
+        <!--android:id="@+id/detail_poster"-->
+        <!--android:background="@drawable/share_loadingview_bg"-->
+        <!--/>-->
+    <com.huangyong.playerlib.CustomIjkplayer
+        android:id="@+id/video_view"
         android:layout_width="500pt"
         android:layout_height="300pt"
         android:layout_marginLeft="50pt"
         android:layout_marginTop="70pt"
-        android:id="@+id/detail_poster"
-        android:background="@drawable/share_loadingview_bg"
+        android:background="@android:color/transparent"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -22,103 +30,145 @@
         android:textColor="#fff"
         android:textSize="34pt"
         android:textStyle="bold"
-        android:layout_toRightOf="@+id/detail_poster"
+        android:layout_toRightOf="@+id/video_view"
         android:layout_marginLeft="20pt"
         android:layout_marginTop="90pt"
-
         />
     <TextView
-        android:layout_toRightOf="@+id/detail_poster"
-        android:layout_marginLeft="20pt"
-        android:layout_marginBottom="70pt"
-        android:layout_width="100pt"
-        android:lines="3"
-        android:layout_above="@+id/it_list"
-        android:textColor="#fff"
-        android:gravity="center"
+        android:layout_width="550pt"
+        android:padding="4pt"
+        android:layout_height="wrap_content"
+        android:text="简介："
         android:background="@drawable/bt_shape_selector"
-        android:id="@+id/detail_desc"
-        android:text="简介"
+        android:layout_toRightOf="@+id/video_view"
+        android:id="@+id/desc_short"
+        android:textColor="@color/white"
         android:focusable="true"
-        android:layout_height="40pt"/>
-    <TextView
-        android:layout_toRightOf="@+id/detail_poster"
-        android:layout_marginLeft="140pt"
-        android:layout_marginBottom="70pt"
-        android:layout_width="100pt"
-        android:lines="3"
-        android:layout_above="@+id/it_list"
-        android:textColor="#fff"
-        android:gravity="center"
-        android:background="@drawable/bt_shape_selector"
-        android:id="@+id/detail_favor"
-        android:text="收藏"
-        android:focusable="true"
-        android:layout_height="40pt"/>
+        android:layout_below="@+id/detai_title"
+        android:layout_marginLeft="30pt"
+        android:layout_marginTop="40pt"
+        android:lines="2"
+        android:ellipsize="end"
+        android:lineSpacingExtra="6pt"
+        android:textSize="18pt"
+        />
+   <LinearLayout
+       android:layout_width="wrap_content"
+       android:orientation="horizontal"
+       android:layout_above="@+id/it_list"
+       android:gravity="center_vertical"
+       android:layout_marginBottom="10pt"
+       android:layout_toRightOf="@+id/video_view"
+       android:layout_marginLeft="40pt"
+       android:layout_height="wrap_content">
+       <LinearLayout
+           android:layout_width="100pt"
+           android:orientation="vertical"
+           android:layout_marginLeft="2pt"
+           android:background="@drawable/bt_fuscreen_selector"
+           android:focusable="true"
+           android:clickable="true"
+           android:id="@+id/fullscreen_view"
+           android:layout_gravity="center_horizontal"
+           android:layout_height="70pt">
+           <ImageView
+               android:layout_width="40pt"
+               android:layout_height="40pt"
+               android:layout_gravity="center_horizontal"
+               android:background="@drawable/ic_fullscreen_black_24dp"
+               />
+           <TextView
+               android:layout_width="wrap_content"
+               android:textColor="#fff"
+               android:layout_gravity="center_horizontal"
+               android:gravity="center"
+               android:id="@+id/detail_content"
+               android:text="全屏"
+               android:textSize="14sp"
+               android:layout_height="wrap_content"/>
+       </LinearLayout>
+       <LinearLayout
+           android:layout_width="100pt"
+           android:orientation="vertical"
+           android:layout_marginLeft="18pt"
+           android:background="@drawable/bt_shape_selector"
+           android:focusable="true"
+           android:layout_gravity="center_horizontal"
+           android:layout_height="70pt">
+           <ImageView
+               android:layout_width="40pt"
+               android:layout_height="40pt"
+               android:layout_gravity="center_horizontal"
+               android:background="@drawable/ic_favorite_black_24dp"
+               />
+           <TextView
+               android:layout_width="wrap_content"
+               android:textColor="#fff"
+               android:layout_gravity="center_horizontal"
+               android:gravity="center"
+               android:id="@+id/detail_favor"
+               android:text="收藏"
+               android:textSize="14sp"
+               android:layout_height="wrap_content"/>
+       </LinearLayout>
+       <TextView
+           android:layout_width="100pt"
+           android:lines="3"
+           android:textColor="#fff"
+           android:gravity="center"
+           android:layout_marginLeft="16pt"
+           android:background="@drawable/bt_shape_selector"
+           android:id="@+id/detail_desc"
+           android:text="简介"
+           android:focusable="true"
+           android:layout_height="40pt"/>
 
-    <TextView
-        android:layout_toRightOf="@+id/detail_poster"
-        android:layout_marginLeft="260pt"
-        android:layout_marginBottom="70pt"
-        android:layout_width="100pt"
-        android:lines="3"
-        android:layout_above="@+id/it_list"
-        android:textColor="#fff"
-        android:gravity="center"
-        android:background="@drawable/bt_shape_selector"
-        android:id="@+id/detail_chose"
-        android:text="选集"
-        android:focusable="true"
-        android:layout_height="40pt"/>
-    <TextView
-        android:layout_toRightOf="@+id/detail_poster"
-        android:layout_marginLeft="260pt"
-        android:layout_marginBottom="70pt"
-        android:layout_width="100pt"
-        android:lines="3"
-        android:layout_above="@+id/it_list"
-        android:textColor="#fff"
-        android:gravity="center"
-        android:background="@drawable/bt_shape_selector"
-        android:id="@+id/detail_content"
-        android:visibility="invisible"
-        android:text="选集"
-        android:layout_height="40pt"/>
 
-    <FrameLayout
+   </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
         android:layout_marginLeft="50pt"
+        android:layout_marginTop="20pt"
+        android:layout_below="@+id/video_view"
         android:layout_marginRight="50pt"
-        android:layout_marginBottom="10pt"
-        android:clipChildren="false"
+        android:orientation="vertical"
         android:id="@+id/it_list"
-        android:clipToPadding="false"
-        android:layout_height="270pt">
+        android:layout_height="250pt">
 
-        <!--<com.owen.tvrecyclerview.widget.TvRecyclerView-->
-            <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-            <!--android:id="@+id/downlist"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:background="#000d557f"-->
-            <!--android:focusable="false"-->
-            <!--android:orientation="vertical"-->
-            <!--android:clipToPadding="false"-->
-            <!--android:clipChildren="false"-->
-            <!--android:focusableInTouchMode="false"-->
-            <!--app:tv_layoutManager="GridLayoutManager"-->
-            <!--app:tv_numColumns="1"-->
-            <!--app:tv_numRows="2"-->
-            <!--/>-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="本地通道"
+            android:textSize="20pt"
+            android:textColor="@color/white"
+            />
         <com.owen.tvrecyclerview.widget.TvRecyclerView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/downlist"
+            android:layout_marginTop="2pt"
             android:layout_width="match_parent"
-            android:layout_height="100pt"
-            android:focusable="true"
-            android:orientation="vertical"
+            android:layout_height="50pt"
+            android:orientation="horizontal"
             app:tv_layoutManager="V7LinearLayoutManager"
-            android:padding="20pt"/>
-    </FrameLayout>
+            android:padding="2pt"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Web通道"
+            android:layout_marginTop="4pt"
+            android:textSize="20pt"
+            android:textColor="@color/white"
+            />
+        <com.owen.tvrecyclerview.widget.TvRecyclerView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/downlist2"
+            android:layout_width="match_parent"
+            android:layout_height="50pt"
+            android:orientation="horizontal"
+            android:layout_marginTop="2pt"
+            app:tv_layoutManager="V7LinearLayoutManager"
+            android:padding="2pt"/>
+
+    </LinearLayout>
 </RelativeLayout>

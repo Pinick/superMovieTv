@@ -124,7 +124,7 @@ public class PlayerActivity extends Activity {
             }
         }
     };
-    interface OncheckListener{
+    public interface OncheckListener{
         void onChecked(int index);
     }
     @Override

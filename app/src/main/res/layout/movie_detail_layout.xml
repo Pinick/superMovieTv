@@ -10,7 +10,7 @@
         android:layout_marginLeft="50pt"
         android:scaleType="centerCrop"
         android:layout_marginTop="80pt"
-        android:id="@+id/detail_poster"
+        android:id="@+id/video_view"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -20,14 +20,14 @@
         android:textColor="#fff"
         android:textSize="34pt"
         android:textStyle="bold"
-        android:layout_toRightOf="@+id/detail_poster"
+        android:layout_toRightOf="@+id/video_view"
         android:layout_marginLeft="20pt"
         android:layout_marginTop="90pt"
 
         />
     <!-- android:background="@drawable/item_tx_bg"-->
     <TextView
-        android:layout_toRightOf="@+id/detail_poster"
+        android:layout_toRightOf="@+id/video_view"
         android:layout_marginLeft="20pt"
         android:layout_marginBottom="30pt"
         android:layout_marginRight="100pt"
