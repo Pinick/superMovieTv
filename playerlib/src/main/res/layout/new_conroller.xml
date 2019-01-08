@@ -108,7 +108,6 @@
             android:max="1000"
             android:maxHeight="2pt"
             android:progressDrawable="@drawable/dkplayer_layer_progress_bar"
-            android:thumb="@drawable/dkplayer_seekbar_thumb"
             android:thumbOffset="0dp" />
 
         <TextView
