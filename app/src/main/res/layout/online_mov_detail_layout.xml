@@ -148,7 +148,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="本地通道"
+            android:text="播放"
             android:textSize="20pt"
             android:textColor="@color/white"
             />
@@ -159,9 +159,11 @@
             android:layout_width="match_parent"
             android:layout_height="50pt"
             android:orientation="horizontal"
+            app:isAutoProcessFocus="true"
+            app:scrollMode="alignScroll"
             app:tv_layoutManager="V7LinearLayoutManager"
             android:padding="2pt"/>
-        <TextView
+        <!--<TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Web通道"
@@ -177,7 +179,7 @@
             android:orientation="horizontal"
             android:layout_marginTop="2pt"
             app:tv_layoutManager="V7LinearLayoutManager"
-            android:padding="2pt"/>
+            android:padding="2pt"/>-->
 
     </LinearLayout>
 </RelativeLayout>

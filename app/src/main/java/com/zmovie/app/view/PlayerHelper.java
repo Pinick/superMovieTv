@@ -134,4 +134,16 @@ public class PlayerHelper {
         }
         controller.onKeyDown(keyCode,event);
     }
+
+    public void startPlayFullScreen(String url, String title) {
+        if (ijkVideoView!=null&&ijkVideoView.isPlaying()){
+            ijkVideoView.stopPlayback();
+        }
+        if (ijkVideoView!=null){
+            ijkVideoView.setUrl(url);
+            ijkVideoView.setTitle(title);
+            ijkVideoView.start();
+        }
+        makeFullscreen();
+    }
 }

@@ -57,11 +57,12 @@ public class OnlineMovDetailActivity extends Activity {
     private String descContent;
     private FocusBorder mFocusBorder;
     private PlayUrlBean playUrlBean;
-    private TvRecyclerView recyclerView2;
+//    private TvRecyclerView recyclerView2;
     private TextView shortDesc;
     private PlayerHelper playerHelper;
     private View fullScreen;
     private View descView;
+    private ChoseSerisDialog serisDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,28 +136,48 @@ public class OnlineMovDetailActivity extends Activity {
             playWebUrlList.add("第"+(i+1)+"集");
         }
         for (int i = 0; i < playUrlBean.getM3u8().size(); i++) {
-            playM3u8List.add("第"+(i+1)+"集");
+            if (playUrlBean.getM3u8().size()==1){
+                playM3u8List.add("在线观看");
+            }else {
+                if (playUrlBean.getM3u8().size()>10){
+                    playM3u8List.add("第"+(i+1)+"集");
+                    if (i==9){
+                        break;
+                    }
+                }
+
+            }
+
         }
         Log.e("playurllist",playUrlBean.getM3u8().size()+"");
 
         final PlayListAdapter mAdapter = new PlayListAdapter(OnlineMovDetailActivity.this, false);
         mAdapter.setDatas(playM3u8List);
-        final PlayListAdapter mNormalAdapter = new PlayListAdapter(OnlineMovDetailActivity.this, false);
-        mNormalAdapter.setDatas(playWebUrlList);
+//        final PlayListAdapter mNormalAdapter = new PlayListAdapter(OnlineMovDetailActivity.this, false);
+//        mNormalAdapter.setDatas(playWebUrlList);
 
-        recyclerView2.setAdapter(mNormalAdapter);
-        recyclerView2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                Log.i("qq", "onFocusChange1==> " +hasFocus);
-                if(!hasFocus) {
-                    mFocusBorder.setVisible(false);
-                }
-            }
-        });
+//        recyclerView2.setAdapter(mNormalAdapter);
+//        recyclerView2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                Log.i("qq", "onFocusChange1==> " +hasFocus);
+//                if(!hasFocus) {
+//                    mFocusBorder.setVisible(false);
+//                }
+//            }
+//        });
         if (playUrlBean.getM3u8()!=null){
             playerHelper.startPlay(playUrlBean.getM3u8().get(0).getUrl(),playUrlBean.getM3u8().get(0).getTitle());
         }
+        serisDialog = new ChoseSerisDialog(OnlineMovDetailActivity.this,playUrlBean.getM3u8().size(), new ChoseSerisDialog.OnItemClicked() {
+            @Override
+            public void clicked(int postion) {
+                playerHelper.startPlayFullScreen(playUrlBean.getM3u8().get(0).getUrl(),playUrlBean.getM3u8().get(0).getTitle());
+                serisDialog.dismiss();
+            }
+        });
+
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         recyclerView.setAdapter(mAdapter);
         recyclerView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -201,13 +222,13 @@ public class OnlineMovDetailActivity extends Activity {
 
 
         recyclerView = findViewById(R.id.downlist);
-        recyclerView2 = findViewById(R.id.downlist2);
+//        recyclerView2 = findViewById(R.id.downlist2);
 
         if (recyclerView.getChildAt(0)!=null){
             recyclerView.getChildAt(0).setNextFocusUpId(R.id.fullscreen_view);
         }
         recyclerView.setSpacingWithMargins(12, 20);
-        recyclerView2.setSpacingWithMargins(12,20);
+//        recyclerView2.setSpacingWithMargins(12,20);
 
         //播放器
         playerHelper = new PlayerHelper();
@@ -224,10 +245,14 @@ public class OnlineMovDetailActivity extends Activity {
 
             @Override
             public void onItemClick(TvRecyclerView parent, View itemView, int position) {
-                playerHelper.startPlay(playUrlBean.getM3u8().get(0).getUrl(),playUrlBean.getM3u8().get(0).getTitle());
+                if (position==9){
+                    serisDialog.show();
+                }else {
+                    playerHelper.startPlay(playUrlBean.getM3u8().get(0).getUrl(),playUrlBean.getM3u8().get(0).getTitle());
+                }
             }
         });
-        recyclerView2.setOnItemListener(new SimpleOnItemListener() {
+        /*recyclerView2.setOnItemListener(new SimpleOnItemListener() {
 
             @Override
             public void onItemSelected(TvRecyclerView parent, View itemView, int position) {
@@ -235,12 +260,12 @@ public class OnlineMovDetailActivity extends Activity {
 
             @Override
             public void onItemClick(TvRecyclerView parent, View itemView, int position) {
-                Intent intent = new Intent(OnlineMovDetailActivity.this, OnLinePlayerWebview.class);
+                Intent intent = new Intent(OnlineMovDetailActivity.this, WebPlayerActivity.class);
                 intent.putExtra(KeyParam.PLAYURL,playUrlBean.getNormal().get(position).getUrl());
                 startActivity(intent);
 
             }
-        });
+        });*/
         tvDescription = findViewById(R.id.desc_short);
 
     }
@@ -280,6 +305,11 @@ public class OnlineMovDetailActivity extends Activity {
     public void onPause() {
         super.onPause();
         ijkplayer.pause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     @Override

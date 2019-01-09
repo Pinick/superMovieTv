@@ -26,10 +26,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.OnlineMovDetailActivity"
-            android:screenOrientation="landscape"
+        <activity
+            android:name=".view.OnlineMovDetailActivity"
             android:launchMode="singleTask"
-            />
+            android:screenOrientation="landscape" />
         <activity
             android:name="com.tencent.smtt.sdk.VideoActivity"
             android:alwaysRetainTaskState="true"
@@ -42,7 +42,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.VideoLibraryActivity"></activity>
+        <activity android:name=".view.VideoLibraryActivity" />
+        <activity android:name=".view.WebPlayerActivity"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="landscape"
+            android:launchMode="singleTask"
+            android:configChanges="orientation|screenSize"
+            ></activity>
     </application>
 
 </manifest>

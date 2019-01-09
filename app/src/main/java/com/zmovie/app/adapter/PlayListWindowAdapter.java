@@ -21,9 +21,9 @@ import android.content.Context;
 import com.zmovie.app.R;
 
 
-public class PlayListAdapter extends CommonRecyclerViewAdapter<String> {
+public class PlayListWindowAdapter extends CommonRecyclerViewAdapter<String> {
 
-    public PlayListAdapter(Context context, boolean isV7) {
+    public PlayListWindowAdapter(Context context) {
         super(context);
     }
 
@@ -35,6 +35,6 @@ public class PlayListAdapter extends CommonRecyclerViewAdapter<String> {
     @Override
     public void onBindItemHolder(CommonRecyclerViewHolder helper, String item, int position) {
 
-        helper.getHolder().setText(R.id.title, position==9?"更多…":item);
+        helper.getHolder().setText(R.id.title, item);
     }
 }
