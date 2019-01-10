@@ -56,19 +56,22 @@ public class OnlineMovListFragment extends BaseFragment implements IOnlineView {
         super.onActivityCreated(savedInstanceState);
         Bundle bundle = getArguments();
         this.pageType = bundle.getString("Type");
-        initData(pageType);
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(Params.ACTION_RESET_POSITION);
+        mRecyclerView.setSpacingWithMargins(20, 30);
+        mRecyclerView.setSelectedItemAtCentered(true);
+        setListener();
+    }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        initData(pageType);
     }
 
     private void initData(String pageType) {
         index = 1;
         getOnlinePresenter = new GetOnlinePresenter(getContext(),this);
         getOnlinePresenter.getOnlineMvData(pageType,index,18);
-        mRecyclerView.setSpacingWithMargins(20, 30);
-        mRecyclerView.setSelectedItemAtCentered(true);
-        setListener();
+
 
     }
 
@@ -156,6 +159,5 @@ public class OnlineMovListFragment extends BaseFragment implements IOnlineView {
     @Override
     public void onDestroy() {
         super.onDestroy();
-
     }
 }

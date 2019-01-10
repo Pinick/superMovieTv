@@ -2,7 +2,9 @@ package com.zmovie.app.view;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -223,10 +225,22 @@ public class OnlineMovDetailActivity extends Activity {
 
             @Override
             public void onItemSelected(TvRecyclerView parent, View itemView, int position) {
-                itemView.setSelected(true);
+
             }
             @Override
-            public void onItemClick(TvRecyclerView parent, View itemView, int position) {
+            public void onItemClick(final TvRecyclerView parent, final View itemView, int position) {
+
+                new Handler().post(new Runnable() {
+                    @Override
+                    public void run() {
+                        for (int i = 0; i < parent.getChildCount(); i++) {
+                            ((TextView)parent.getChildAt(i).findViewById(R.id.title)).setTextColor(Color.WHITE);
+                        }
+                        TextView textView = itemView.findViewById(R.id.title);
+                        textView.setTextColor(getResources().getColor(R.color.green_bright));
+                    }
+                });
+
                 if (position==9){
                     serisDialog.show();
                 }else {
@@ -255,13 +269,6 @@ public class OnlineMovDetailActivity extends Activity {
         if (!ijkplayer.onBackPressed()) {
             super.onBackPressed();
         }
-//        if ((System.currentTimeMillis() - mExitTime) > 2000) {
-//            Toast.makeText(this, "再按一次退出噢", Toast.LENGTH_SHORT).show();
-//            mExitTime = System.currentTimeMillis();
-//        } else {
-//            finish();
-//            overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
-//        }
         super.onBackPressed();
     }
 
@@ -286,14 +293,10 @@ public class OnlineMovDetailActivity extends Activity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-
-
         if (ijkplayer.isFullScreen()){
             playerHelper.onKeyEvent(keyCode,event);
             return true;
         }
-
-
         return super.onKeyDown(keyCode, event);
     }
 }

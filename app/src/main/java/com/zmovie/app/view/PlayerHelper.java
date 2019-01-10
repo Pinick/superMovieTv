@@ -139,13 +139,10 @@ public class PlayerHelper {
         if (controller==null){
             return;
         }
-        Log.e("startplayurl",keyCode+"");
         controller.onKeyDown(keyCode,event);
     }
 
     public void startPlayFullScreen(String url, String title) {
-
-        Log.e("startplayurl",url);
 
         if (ijkVideoView!=null&&ijkVideoView.isPlaying()){
             ijkVideoView.stopPlayback();

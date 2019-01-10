@@ -3,9 +3,11 @@ package com.zmovie.app.view;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.view.View;
+import android.widget.TextView;
 
 import com.owen.tvrecyclerview.widget.SimpleOnItemListener;
 import com.owen.tvrecyclerview.widget.TvRecyclerView;
@@ -52,7 +54,17 @@ public class ChoseSerisDialog extends Dialog {
         }
 
         @Override
-        public void onItemClick(TvRecyclerView parent, View itemView, int position) {
+        public void onItemClick(final TvRecyclerView parent, final View itemView, int position) {
+            new Handler().post(new Runnable() {
+                @Override
+                public void run() {
+                    for (int i = 0; i < parent.getChildCount(); i++) {
+                        ((TextView)parent.getChildAt(i).findViewById(R.id.title)).setTextColor(Color.WHITE);
+                    }
+                    TextView textView = itemView.findViewById(R.id.title);
+                    textView.setTextColor(getContext().getResources().getColor(R.color.green_bright));
+                }
+            });
             if (listener!=null){
                 listener.clicked(position);
             }

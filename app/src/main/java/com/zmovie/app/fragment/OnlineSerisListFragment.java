@@ -1,5 +1,6 @@
 package com.zmovie.app.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -52,6 +53,14 @@ public class OnlineSerisListFragment extends BaseFragment implements IOnlineView
         super.onActivityCreated(savedInstanceState);
         Bundle bundle = getArguments();
         this.pageType = bundle.getString("Type");
+        mRecyclerView.setSpacingWithMargins(20, 30);
+        mRecyclerView.setSelectedItemAtCentered(true);
+        setListener();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
         initData(pageType);
     }
 
@@ -59,9 +68,6 @@ public class OnlineSerisListFragment extends BaseFragment implements IOnlineView
         index = 1;
         getOnlinePresenter = new GetOnlinePresenter(getContext(),this);
         getOnlinePresenter.getOnlineSerisData(pageType,index,18);
-        mRecyclerView.setSpacingWithMargins(20, 30);
-        mRecyclerView.setSelectedItemAtCentered(true);
-        setListener();
 
     }
 

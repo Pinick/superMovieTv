@@ -500,9 +500,7 @@ public class CustomControler extends GestureVideoController implements View.OnCl
             mMediaPlayer.stopFullScreen();
         }
         if (keyCode==KeyEvent.KEYCODE_ENTER||keyCode==KEYCODE_DPAD_CENTER){
-            Log.e("keyeventlog","确定键");
             doPauseResume();
-
             show();
 
         }
