@@ -59,7 +59,7 @@ public class OnlineMovListFragment extends BaseFragment implements IOnlineView {
         initData(pageType);
         IntentFilter filter = new IntentFilter();
         filter.addAction(Params.ACTION_RESET_POSITION);
-        getContext().registerReceiver(receiver,filter);
+
     }
 
     private void initData(String pageType) {
@@ -153,29 +153,9 @@ public class OnlineMovListFragment extends BaseFragment implements IOnlineView {
     }
 
 
-    BroadcastReceiver receiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(Params.ACTION_RESET_POSITION)) {
-                if (mRecyclerView!=null){
-
-                    mRecyclerView.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            mRecyclerView.setSelectionWithSmooth(0);
-                        }
-                    },200);
-
-
-                }
-
-            }
-        }
-    };
-
     @Override
     public void onDestroy() {
         super.onDestroy();
-        getContext().unregisterReceiver(receiver);
+
     }
 }

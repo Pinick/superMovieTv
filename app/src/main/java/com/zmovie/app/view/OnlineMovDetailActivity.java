@@ -9,22 +9,15 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bftv.myapplication.config.KeyParam;
-import com.bftv.myapplication.view.OnLinePlayerWebview;
 import com.google.gson.Gson;
 import com.huangyong.playerlib.CustomIjkplayer;
-import com.huangyong.playerlib.Params;
-import com.huangyong.playerlib.PlayerActivity;
 import com.owen.tvrecyclerview.widget.SimpleOnItemListener;
 import com.owen.tvrecyclerview.widget.TvRecyclerView;
 import com.zmovie.app.R;
 import com.zmovie.app.adapter.PlayListAdapter;
 import com.zmovie.app.data.GlobalMsg;
-import com.zmovie.app.display.DisplayAdaptive;
 import com.zmovie.app.domain.DescBean;
 import com.zmovie.app.domain.PlayUrlBean;
 import com.zmovie.app.focus.FocusBorder;
@@ -131,6 +124,9 @@ public class OnlineMovDetailActivity extends Activity {
         playUrlBean = gson.fromJson(downUrl, PlayUrlBean.class);
         ArrayList<String> playM3u8List = new ArrayList<>();
         ArrayList<String> playWebUrlList = new ArrayList<>();
+        if (playUrlBean.getM3u8()!=null){
+            playerHelper.startPlay(playUrlBean.getM3u8().get(0).getUrl(),playUrlBean.getM3u8().get(0).getTitle());
+        }
 
         for (int i = 0; i < playUrlBean.getNormal().size(); i++) {
             playWebUrlList.add("第"+(i+1)+"集");
@@ -149,30 +145,17 @@ public class OnlineMovDetailActivity extends Activity {
             }
 
         }
-        Log.e("playurllist",playUrlBean.getM3u8().size()+"");
 
         final PlayListAdapter mAdapter = new PlayListAdapter(OnlineMovDetailActivity.this, false);
         mAdapter.setDatas(playM3u8List);
-//        final PlayListAdapter mNormalAdapter = new PlayListAdapter(OnlineMovDetailActivity.this, false);
-//        mNormalAdapter.setDatas(playWebUrlList);
+//
 
-//        recyclerView2.setAdapter(mNormalAdapter);
-//        recyclerView2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View v, boolean hasFocus) {
-//                Log.i("qq", "onFocusChange1==> " +hasFocus);
-//                if(!hasFocus) {
-//                    mFocusBorder.setVisible(false);
-//                }
-//            }
-//        });
-        if (playUrlBean.getM3u8()!=null){
-            playerHelper.startPlay(playUrlBean.getM3u8().get(0).getUrl(),playUrlBean.getM3u8().get(0).getTitle());
-        }
         serisDialog = new ChoseSerisDialog(OnlineMovDetailActivity.this,playUrlBean.getM3u8().size(), new ChoseSerisDialog.OnItemClicked() {
             @Override
             public void clicked(int postion) {
-                playerHelper.startPlayFullScreen(playUrlBean.getM3u8().get(0).getUrl(),playUrlBean.getM3u8().get(0).getTitle());
+                Log.e("playurllist",playUrlBean.getM3u8().get(postion).getUrl()+"");
+               // playerHelper.startPlayFullScreen(playUrlBean.getM3u8().get(postion).getUrl(),playUrlBean.getM3u8().get(postion).getTitle());
+                playerHelper.startPlayFullScreen(playUrlBean.getM3u8().get(postion).getUrl(),playUrlBean.getM3u8().get(postion).getTitle());
                 serisDialog.dismiss();
             }
         });
@@ -224,15 +207,14 @@ public class OnlineMovDetailActivity extends Activity {
         recyclerView = findViewById(R.id.downlist);
 //        recyclerView2 = findViewById(R.id.downlist2);
 
-        if (recyclerView.getChildAt(0)!=null){
-            recyclerView.getChildAt(0).setNextFocusUpId(R.id.fullscreen_view);
-        }
+        recyclerView.setNextFocusUpId(R.id.fullscreen_view);
+
         recyclerView.setSpacingWithMargins(12, 20);
 //        recyclerView2.setSpacingWithMargins(12,20);
 
         //播放器
-        playerHelper = new PlayerHelper();
-        playerHelper.init(this,title,ijkplayer);
+       playerHelper = PlayerHelper.getInstance();
+        playerHelper.init(this,ijkplayer);
 
 
         titleView = findViewById(R.id.detai_title);
@@ -241,31 +223,17 @@ public class OnlineMovDetailActivity extends Activity {
 
             @Override
             public void onItemSelected(TvRecyclerView parent, View itemView, int position) {
+                itemView.setSelected(true);
             }
-
             @Override
             public void onItemClick(TvRecyclerView parent, View itemView, int position) {
                 if (position==9){
                     serisDialog.show();
                 }else {
-                    playerHelper.startPlay(playUrlBean.getM3u8().get(0).getUrl(),playUrlBean.getM3u8().get(0).getTitle());
+                   playerHelper.startPlay(playUrlBean.getM3u8().get(position).getUrl(),playUrlBean.getM3u8().get(position).getTitle());
                 }
             }
         });
-        /*recyclerView2.setOnItemListener(new SimpleOnItemListener() {
-
-            @Override
-            public void onItemSelected(TvRecyclerView parent, View itemView, int position) {
-            }
-
-            @Override
-            public void onItemClick(TvRecyclerView parent, View itemView, int position) {
-                Intent intent = new Intent(OnlineMovDetailActivity.this, WebPlayerActivity.class);
-                intent.putExtra(KeyParam.PLAYURL,playUrlBean.getNormal().get(position).getUrl());
-                startActivity(intent);
-
-            }
-        });*/
         tvDescription = findViewById(R.id.desc_short);
 
     }
@@ -280,10 +248,12 @@ public class OnlineMovDetailActivity extends Activity {
 
         if (ijkplayer.isFullScreen()){
             playerHelper.cancelFullscreen();
+            fullScreen.requestFocus();
             return;
         }
-        if (ijkplayer.isPlaying()){
-            ijkplayer.stopPlayback();
+
+        if (!ijkplayer.onBackPressed()) {
+            super.onBackPressed();
         }
 //        if ((System.currentTimeMillis() - mExitTime) > 2000) {
 //            Toast.makeText(this, "再按一次退出噢", Toast.LENGTH_SHORT).show();
@@ -307,8 +277,10 @@ public class OnlineMovDetailActivity extends Activity {
         ijkplayer.pause();
     }
 
+
     @Override
     protected void onDestroy() {
+        ijkplayer.release();
         super.onDestroy();
     }
 

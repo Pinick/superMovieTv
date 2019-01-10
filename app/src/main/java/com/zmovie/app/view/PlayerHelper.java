@@ -23,16 +23,26 @@ public class PlayerHelper {
 
     private CustomIjkplayer ijkVideoView;
     private CustomControler controller;
+    private static volatile PlayerHelper playerHelper;
+    public static PlayerHelper getInstance(){
+        if (playerHelper==null){
+            synchronized (PlayerHelper.class){
+                if (playerHelper==null){
+                    playerHelper = new PlayerHelper();
+                }
+            }
+        }
+        return playerHelper;
+    }
 
-    public void init(Context context,String title, CustomIjkplayer ijkVideoView ){
+    public void init(Context context, CustomIjkplayer ijkVideoView){
         this.ijkVideoView = ijkVideoView;
-
         controller = new CustomControler(context);
         controller.getThumb().setImageResource(R.drawable.share_loadingview_bg);
-        controller.setFocusable(false);
         controller.setOnCheckListener(listener );
-        ijkVideoView.setVideoController(controller);
+        controller.setFocusable(false);
         ijkVideoView.setFocusable(false);
+        ijkVideoView.setVideoController(controller);
         IjkPlayer ijkPlayer = new IjkPlayer(context) {
             @Override
             public void setEnableMediaCodec(boolean isEnable) {
@@ -50,15 +60,13 @@ public class PlayerHelper {
         PlayerConfig playerConfig = new PlayerConfig.Builder()
                 //启用边播边缓存功能
                 // .autoRotate() //启用重力感应自动进入/退出全屏功能
-                .enableMediaCodec()//启动硬解码，启用后可能导致视频黑屏，音画不同步
                 .usingSurfaceView() //启用SurfaceView显示视频，不调用默认使用TextureView
                 .savingProgress() //保存播放进度
                 .disableAudioFocus() //关闭AudioFocusChange监听
-                .setLooping() //循环播放当前正在播放的视频
+                //.setLooping() //循环播放当前正在播放的视频
                 .setCustomMediaPlayer(ijkPlayer)
                 .build();
         ijkVideoView.setPlayerConfig(playerConfig);
-
     }
 
 
@@ -101,10 +109,9 @@ public class PlayerHelper {
     };
 
     public void startPlay(String url, String title) {
-        if (ijkVideoView!=null&&ijkVideoView.isPlaying()){
-            ijkVideoView.stopPlayback();
-        }
+
         if (ijkVideoView!=null){
+            ijkVideoView.release();
             ijkVideoView.setUrl(url);
             ijkVideoView.setTitle(title);
             ijkVideoView.start();
@@ -132,14 +139,19 @@ public class PlayerHelper {
         if (controller==null){
             return;
         }
+        Log.e("startplayurl",keyCode+"");
         controller.onKeyDown(keyCode,event);
     }
 
     public void startPlayFullScreen(String url, String title) {
+
+        Log.e("startplayurl",url);
+
         if (ijkVideoView!=null&&ijkVideoView.isPlaying()){
             ijkVideoView.stopPlayback();
         }
         if (ijkVideoView!=null){
+            ijkVideoView.release();
             ijkVideoView.setUrl(url);
             ijkVideoView.setTitle(title);
             ijkVideoView.start();

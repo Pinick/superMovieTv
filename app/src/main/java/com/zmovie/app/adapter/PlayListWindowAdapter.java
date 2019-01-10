@@ -17,6 +17,8 @@
 package com.zmovie.app.adapter;
 
 import android.content.Context;
+import android.util.Log;
+import android.view.View;
 
 import com.zmovie.app.R;
 
@@ -36,5 +38,6 @@ public class PlayListWindowAdapter extends CommonRecyclerViewAdapter<String> {
     public void onBindItemHolder(CommonRecyclerViewHolder helper, String item, int position) {
 
         helper.getHolder().setText(R.id.title, item);
+
     }
 }

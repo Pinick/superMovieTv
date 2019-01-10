@@ -7,17 +7,17 @@
     android:layout_marginLeft="120pt"
     android:orientation="vertical"
     android:layout_marginRight="120pt"
-    android:layout_marginTop="50pt"
-    android:layout_marginBottom="50pt"
+    android:layout_marginTop="120pt"
+    android:layout_marginBottom="120pt"
     android:layout_height="match_parent">
 
          <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="选集列表"
-            android:layout_marginTop="112pt"
+            android:layout_marginTop="22pt"
             android:textSize="22pt"
-             android:layout_marginLeft="50pt"
+             android:layout_marginLeft="22pt"
             android:textColor="@color/white"
             />
     <com.owen.tvrecyclerview.widget.TvRecyclerView
@@ -27,7 +27,8 @@
         android:layout_height="match_parent"
         android:paddingLeft="20pt"
         android:paddingRight="20pt"
-        android:layout_marginTop="100pt"
+        android:layout_marginTop="30pt"
+        android:layout_marginBottom="30pt"
         android:paddingTop="30pt"
         android:background="#00e1e1e1"
         android:layout_weight="1"

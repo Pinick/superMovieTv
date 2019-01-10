@@ -32,6 +32,8 @@ import com.dueeeke.videoplayer.player.IjkVideoView;
 import com.dueeeke.videoplayer.util.L;
 import com.dueeeke.videoplayer.util.PlayerUtils;
 
+import static android.view.KeyEvent.KEYCODE_DPAD_CENTER;
+
 /**
  * creator huangyong
  * createTime 2018/12/6 下午2:14
@@ -497,7 +499,7 @@ public class CustomControler extends GestureVideoController implements View.OnCl
             if (mMediaPlayer!=null)
             mMediaPlayer.stopFullScreen();
         }
-        if (keyCode==KeyEvent.KEYCODE_ENTER){
+        if (keyCode==KeyEvent.KEYCODE_ENTER||keyCode==KEYCODE_DPAD_CENTER){
             Log.e("keyeventlog","确定键");
             doPauseResume();
 

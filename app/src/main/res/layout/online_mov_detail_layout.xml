@@ -159,27 +159,9 @@
             android:layout_width="match_parent"
             android:layout_height="50pt"
             android:orientation="horizontal"
-            app:isAutoProcessFocus="true"
-            app:scrollMode="alignScroll"
             app:tv_layoutManager="V7LinearLayoutManager"
             android:padding="2pt"/>
-        <!--<TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Web通道"
-            android:layout_marginTop="4pt"
-            android:textSize="20pt"
-            android:textColor="@color/white"
-            />
-        <com.owen.tvrecyclerview.widget.TvRecyclerView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/downlist2"
-            android:layout_width="match_parent"
-            android:layout_height="50pt"
-            android:orientation="horizontal"
-            android:layout_marginTop="2pt"
-            app:tv_layoutManager="V7LinearLayoutManager"
-            android:padding="2pt"/>-->
+
 
     </LinearLayout>
 </RelativeLayout>
